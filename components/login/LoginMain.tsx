@@ -1,13 +1,26 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
-import { text } from "stream/consumers";
+import { useQuery, gql } from "@apollo/client";
+
+const GET_USER_INFO = gql`
+  query MyQuery($userId: String!) {
+    personByUserId(userId: $userId) {
+      password
+    }
+  }
+`;
 
 const LoginMain = () => {
   const [id, setId] = useState("");
   const [psword, setpsword] = useState("");
   const router = useRouter();
   
+  /* const { loading, data } = useQuery(GET_USER_INFO, {
+    variables: {
+      userId: id,
+    },
+  }); */
 
   const test = () => {
     console.log(id,psword)
