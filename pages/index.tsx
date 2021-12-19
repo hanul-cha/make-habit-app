@@ -1,18 +1,15 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import Main from "../components/main/main";
+import Main from "../components/main/Main";
 import styles from "../styles/Home.module.css";
 
 
 
 const Home: NextPage = () => {
-  const [checkLogin, setCheckLogin] = useState({});
+  const [loginUser, setLoginUser] = useState({});
   return (
     <>
-      <Main checkLogin={checkLogin} setCheckLogin={setCheckLogin} />
+      <Main loginUser={loginUser} setLoginUser={setLoginUser} />
     </>
   );
 };

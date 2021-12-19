@@ -3,29 +3,30 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 interface MainTypeProps {
-  checkLogin: {
+  loginUser: {
     user?: string;
     psword?: number;
   };
-  setCheckLogin: (a: {}) => void;
+  setLoginUser: (a: {}) => void;
 }
 
-const Main = ({ checkLogin, setCheckLogin }: MainTypeProps) => {
+const Main = ({ loginUser, setLoginUser }: MainTypeProps) => {
   const router = useRouter();
 
   let user = router.query;
-  console.log(user.user);
 
   useEffect(() => {
     if (user.user !== undefined) {
-      setCheckLogin(user);
+      setLoginUser(user);
+      console.log(user.user);
     }
   }, []);
 
   return (
     <>
       {user.user !== undefined ? (
-        <h1>hi {checkLogin.user}</h1>
+        <h1>hi {loginUser.user}</h1>
+        /* 여기에 다른 메인컴포넌트가 들어올것임 */
       ) : (
         <div>
           <h2>로그인이 필요합니다</h2>
