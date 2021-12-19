@@ -1,23 +1,19 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import Main from "../components/main/main";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  const [checkLogin, setCheckLogin] = useState(false)
+  const [checkLogin, setCheckLogin] = useState(false);
   return (
-    checkLogin?(
-      <h1>hi</h1>
-    ):(
-      <div>
-      <h2>로그인이 필요합니다</h2>
-      <Link href={'/login'} >로그인</Link>
-      </div>
-    )
-  )
-}
+    <>
+      <Main checkLogin={checkLogin} setCheckLogin={setCheckLogin} />
+    </>
+  );
+};
 
 /* Home.getInitialProps = async (ctx) => {
   const pathname = ctx.pathname;
@@ -25,4 +21,4 @@ const Home: NextPage = () => {
   return { pathname };
 }; */
 
-export default Home
+export default Home;
