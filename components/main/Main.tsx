@@ -3,33 +3,29 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 interface MainTypeProps {
-  checkLogin: boolean;
-  setCheckLogin :(a:boolean) => void
-}
-interface UserType {
-    user? :string
-    psword? :number
+  checkLogin: {
+    user?: string;
+    psword?: number;
+  };
+  setCheckLogin: (a: {}) => void;
 }
 
 const Main = ({ checkLogin, setCheckLogin }: MainTypeProps) => {
-  const [newUser, setNewUser] = useState<UserType>();
   const router = useRouter();
 
-  let user:UserType = router.query
+  let user = router.query;
+  console.log(user.user);
 
   useEffect(() => {
-    if (user !== undefined) {
-      setNewUser(user);
+    if (user.user !== undefined) {
+      setCheckLogin(user);
     }
-    
   }, []);
-
-  
 
   return (
     <>
-      {checkLogin ? (
-        <h1>hi</h1>
+      {user.user !== undefined ? (
+        <h1>hi {checkLogin.user}</h1>
       ) : (
         <div>
           <h2>로그인이 필요합니다</h2>
