@@ -1,35 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 
 interface LoginConectDbTypeProps {
   id: string;
   psword: string;
+  setFailAlert: (a: boolean) => void;
+  setDoLogin: (a: boolean) => void;
 }
 
 const GET_USER_INFO = gql`
   query MyQuery($userId: String!) {
     userByUserId(userId: $userId) {
+      password
       name
     }
   }
 `;
+//userId로 password를 리턴 받을것임
 
-const LoginConectDB = ({ id, psword }: LoginConectDbTypeProps) => {
+const LoginConectDB = ({
+  id,
+  psword,
+  setFailAlert,
+  setDoLogin,
+}: LoginConectDbTypeProps) => {
   const router = useRouter();
-
-  const successLogin = () => {
-    router.push(
-      {
-        pathname: "/",
-        query: {
-          user: "광희",
-          psword: 1234,
-        },
-      },
-      "/"
-    );
-  };
 
   const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {
@@ -37,6 +33,31 @@ const LoginConectDB = ({ id, psword }: LoginConectDbTypeProps) => {
     },
   });
   console.log(loading, data);
+
+  useEffect(() => {
+    if (!loading) {
+      if (data.userByUserId === null) {
+        /* 아이디가 틀림 */
+        setFailAlert(true);
+        setDoLogin(false);
+      } else if (psword !== data.userByUserId.password) {
+        setFailAlert(true);
+        setDoLogin(false);
+      } else {
+        router.push(
+            {
+              pathname: "/",
+              query: {
+                userId: id,
+                psword: psword,
+                name:data.userByUserId.name
+              },
+            },
+            "/"
+          );
+      }
+    }
+  });
 
   return <></>;
 };

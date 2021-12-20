@@ -1,23 +1,40 @@
-import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { TextField, Button, Alert, AlertTitle } from "@mui/material";
 
 import LoginConectDB from "./LoginConectDB";
 
 const LoginMain = () => {
   const [id, setId] = useState("");
   const [psword, setpsword] = useState("");
-  const [doLogin, setDoLogin] = useState(false);
+  const [doLogin, setDoLogin] = useState(false);//로그인 로직 컴포넌트를 켜고 끄는 state
+  const [failAlert, setFailAlert] = useState(false);//알럿을 키고 끄는 state
 
   const pushBtn = () => {
     console.log(id, psword);
     setDoLogin(true);
   };
+  //로그인 로직 컴포넌트 실행
 
-  //type="submit" onClick={pushBtn}
-  //<button onClick={successLogin}>로그인하기</button>
+  useEffect(() => {
+    return () => {
+      setDoLogin(false);
+    };
+  }, []);
+  //다른 라우트로 이동하기 전에 꺼주는 클린업
+
+  setTimeout(() => {
+    setFailAlert(false);
+  }, 3000);
 
   return (
     <>
+      {failAlert && (
+        <Alert severity="error">
+          <AlertTitle>로그인 실패</AlertTitle>
+          <strong>아이디 또는 비밀번호를 확인해 주세요</strong>
+        </Alert>
+      )}
+
       <div className="loginField">
         <TextField
           className="textField"
@@ -44,7 +61,9 @@ const LoginMain = () => {
           login
         </Button>
       </div>
-      {doLogin && <LoginConectDB id={id} psword={psword} />}
+      {doLogin && (
+        <LoginConectDB id={id} psword={psword} setFailAlert={setFailAlert} setDoLogin={setDoLogin} />
+      )}
     </>
   );
 };

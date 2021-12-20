@@ -6,6 +6,7 @@ interface MainTypeProps {
   loginUser: {
     user?: string;
     psword?: number;
+    name?: string;
   };
   setLoginUser: (a: {}) => void;
 }
@@ -14,19 +15,19 @@ const Main = ({ loginUser, setLoginUser }: MainTypeProps) => {
   const router = useRouter();
 
   let user = router.query;
-
+  console.log(user.name);
   useEffect(() => {
-    if (user.user !== undefined) {
+    if (user.name !== undefined) {
       setLoginUser(user);
-      console.log(user.user);
+      
     }
   }, []);
 
-  
+
   return (
     <>
-      {user.user !== undefined ? (
-        <h1>hi {loginUser.user}</h1>
+      {user.name !== undefined ? (
+        <h1>hi {loginUser.name}</h1>
         /* 여기에 다른 메인컴포넌트가 들어올것임 */
       ) : (
         <div>
