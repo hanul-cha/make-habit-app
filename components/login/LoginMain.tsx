@@ -1,67 +1,51 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { Button, Form } from "semantic-ui-react";
-import { useQuery, gql } from "@apollo/client";
+import { TextField, Button } from "@mui/material";
 
-const GET_USER_INFO = gql`
-  query MyQuery {
-    userByUserId(userId: "ccchhh1234") {
-      name
-    }
-  }
-`;
+import LoginConectDB from "./LoginConectDB";
 
 const LoginMain = () => {
   const [id, setId] = useState("");
   const [psword, setpsword] = useState("");
-  const router = useRouter();
+  const [doLogin, setDoLogin] = useState(false);
 
-  const { loading, data } = useQuery(GET_USER_INFO, {
-    variables: {
-      userId: id,
-    },
-  });
-  console.log(loading, data);
-
-  const test = () => {
+  const pushBtn = () => {
     console.log(id, psword);
+    setDoLogin(true);
   };
 
-  const successLogin = () => {
-    router.push(
-      {
-        pathname: "/",
-        query: {
-          user: "광희",
-          psword: 1234,
-        },
-      },
-      "/"
-    );
-  };
+  //type="submit" onClick={pushBtn}
   //<button onClick={successLogin}>로그인하기</button>
+
   return (
-    <Form>
-      <Form.Field>
-        <input
-          placeholder="id"
+    <>
+      <div className="loginField">
+        <TextField
+          className="textField"
+          id="outlined-basic"
+          label="id"
+          variant="outlined"
+          placeholder="user id"
           name="id"
           onChange={(e) => setId(e.target.value)}
         />
-      </Form.Field>
-      <Form.Field>
-        <input
+
+        <TextField
+          className="textField"
+          id="outlined-basic"
+          label="password"
+          variant="outlined"
           name="psword"
           type="password"
-          placeholder="password"
+          placeholder="user password"
           onChange={(e) => setpsword(e.target.value)}
         />
-      </Form.Field>
 
-      <Button type="submit" onClick={test}>
-        Submit
-      </Button>
-    </Form>
+        <Button className="login_btn" variant="outlined" onClick={pushBtn}>
+          login
+        </Button>
+      </div>
+      {doLogin && <LoginConectDB id={id} psword={psword} />}
+    </>
   );
 };
 

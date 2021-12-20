@@ -29,4 +29,16 @@ li {
   background: #fff;
 }
 
+.textField{
+  display: block;
+  width: 50%;
+}
+
+.loginField{
+  display: grid;
+  grid-template-rows: 70px 70px 40px;
+  place-items: center;
+  /* background: red; */
+}
+
 

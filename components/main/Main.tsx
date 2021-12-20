@@ -22,6 +22,7 @@ const Main = ({ loginUser, setLoginUser }: MainTypeProps) => {
     }
   }, []);
 
+  
   return (
     <>
       {user.user !== undefined ? (
