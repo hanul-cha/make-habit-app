@@ -4,9 +4,9 @@ import { Button, Form } from "semantic-ui-react";
 import { useQuery, gql } from "@apollo/client";
 
 const GET_USER_INFO = gql`
-  query MyQuery($userId: String!) {
-    personByUserId(userId: $userId) {
-      password
+  query MyQuery {
+    userByUserId(userId: "ccchhh1234") {
+      name
     }
   }
 `;
@@ -15,16 +15,17 @@ const LoginMain = () => {
   const [id, setId] = useState("");
   const [psword, setpsword] = useState("");
   const router = useRouter();
-  
-  /* const { loading, data } = useQuery(GET_USER_INFO, {
+
+  const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {
       userId: id,
     },
-  }); */
+  });
+  console.log(loading, data);
 
   const test = () => {
-    console.log(id,psword)
-  }
+    console.log(id, psword);
+  };
 
   const successLogin = () => {
     router.push(
@@ -42,18 +43,24 @@ const LoginMain = () => {
   return (
     <Form>
       <Form.Field>
-        <input placeholder="id"name="id" onChange={(e) => setId(e.target.value)} />
+        <input
+          placeholder="id"
+          name="id"
+          onChange={(e) => setId(e.target.value)}
+        />
       </Form.Field>
       <Form.Field>
         <input
-        name="psword"
+          name="psword"
           type="password"
           placeholder="password"
           onChange={(e) => setpsword(e.target.value)}
         />
       </Form.Field>
 
-      <Button type="submit" onClick={test}>Submit</Button>
+      <Button type="submit" onClick={test}>
+        Submit
+      </Button>
     </Form>
   );
 };
