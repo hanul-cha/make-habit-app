@@ -19,7 +19,7 @@ const GET_USER_INFO = gql`
 `;
 //userId로 password를 리턴 받을것임
 
-const LoginConectDB = ({
+const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 위한 컴포넌트로 아무것도 리턴하지 않는다 */
   id,
   psword,
   setFailAlert,
@@ -41,9 +41,11 @@ const LoginConectDB = ({
         setFailAlert(true);
         setDoLogin(false);
       } else if (psword !== data.userByUserId.password) {
+        /* 비밀번호가 틀림 */
         setFailAlert(true);
         setDoLogin(false);
       } else {
+        /* 아이디, 비밀번호가 맞으면 */
         router.push(
             {
               pathname: "/",
@@ -55,6 +57,8 @@ const LoginConectDB = ({
             },
             "/"
           );
+
+          
       }
     }
   });

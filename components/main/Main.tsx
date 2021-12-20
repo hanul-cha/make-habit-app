@@ -15,18 +15,17 @@ const Main = ({ loginUser, setLoginUser }: MainTypeProps) => {
   const router = useRouter();
 
   let user = router.query;
-  console.log(user.name);
   useEffect(() => {
     if (user.name !== undefined) {
       setLoginUser(user);
-      
     }
   }, []);
+  //라우트 이동하면서 받은 값이 있다면 loginUser state를 바꿔줄것임
 
 
   return (
     <>
-      {user.name !== undefined ? (
+      {loginUser.name !== undefined ? (/* 받은값이 있다면 밑에 컴포넌트를 실행 */
         <h1>hi {loginUser.name}</h1>
         /* 여기에 다른 메인컴포넌트가 들어올것임 */
       ) : (

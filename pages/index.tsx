@@ -6,7 +6,8 @@ import styles from "../styles/Home.module.css";
 
 
 const Home: NextPage = () => {
-  const [loginUser, setLoginUser] = useState({});
+  const [loginUser, setLoginUser] = useState({});/* 이 state는 유저정보를 가지고 있다 */
+  console.log(loginUser)
   return (
     <>
       <Main loginUser={loginUser} setLoginUser={setLoginUser} />
