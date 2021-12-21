@@ -33,7 +33,6 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
       userId: id,
     },
   });
-  console.log(loading, data);
 
   useEffect(() => {
     if (!loading) {

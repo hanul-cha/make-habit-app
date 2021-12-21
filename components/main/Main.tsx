@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import axios  from "axios";
+import axios from "axios";
 
 interface MainTypeProps {
-  loginUser: {
-    user?: string;
-    psword?: number;
-    name?: string;
-  };
-  setLoginUser: (a: {}) => void;
+  loginUser: String;
+  setLoginUser: (a: string) => void;
 }
 
 const Main = ({ loginUser, setLoginUser }: MainTypeProps) => {
@@ -17,30 +13,38 @@ const Main = ({ loginUser, setLoginUser }: MainTypeProps) => {
 
   let user = router.query;
   useEffect(() => {
-    if (user.name !== undefined) {
-      setLoginUser(user);
+    if (user.userId !== undefined) {
+      setLoginUser(String(user.userId));
     }
+    //첫로그인하고나서 그려줄 화면에 필요한 setState
+    axios.get("/api/isLogin").then((res) => {
+      if (res.status === 200 && res.data.id) {
+        setLoginUser(res.data.id);
+      }
+    });
+    //새로고침이나 라우트 이동후에 사용할 setState
   }, []);
-  //라우트 이동하면서 받은 값이 있다면 loginUser state를 바꿔줄것임
+  
 
   const removeCookie = () => {
-    axios.get('/api/logout').then(res => {
-      if(res.status === 200){
-        console.log("쿠키삭제 완료")
+    axios.get("/api/logout").then((res) => {
+      if (res.status === 200) {
+        console.log("쿠키삭제 완료");
+        router.push('/login')
       }
-    })
-  }
-
+    });
+  }; //쿠키 삭제
+  /* console.log(loginUser); */
 
   return (
     <>
-      {loginUser.name !== undefined ? (/* 받은값이 있다면 밑에 컴포넌트를 실행 */
-      <div>
-        <h1>hi {loginUser.name}</h1>
-        <button onClick={removeCookie}>logout</button>
+      {loginUser !== "" /* 받은값이 있다면 밑에 컴포넌트를 실행 */ ? (
+        <div>
+          <h1>hi {loginUser}</h1>
+          <button onClick={removeCookie}>logout</button>
         </div>
-        /* 여기에 다른 메인컴포넌트가 들어올것임 */
       ) : (
+        /* 여기에 다른 메인컴포넌트가 들어올것임 */
         <div>
           <h2>로그인이 필요합니다</h2>
           <Link href={"/login"}>로그인</Link>
