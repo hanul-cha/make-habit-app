@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { useRouter } from "next/router";
+import axios  from "axios";
 
 interface LoginConectDbTypeProps {
   id: string;
@@ -45,7 +46,16 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
         setFailAlert(true);
         setDoLogin(false);
       } else {
-        /* 아이디, 비밀번호가 맞으면 */
+        /* 아이디, 비밀번호가 맞으면 == 로그인이 성공하면 */
+        axios.post("/api/login",{
+          params:{
+            name:data.userByUserId.name
+          }
+        }).then((res) => {
+          if(res.status === 200){
+            console.log("pathOk")
+          }
+        })
         router.push(
             {
               pathname: "/",
@@ -57,8 +67,7 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
             },
             "/"
           );
-
-          
+        //push
       }
     }
   });

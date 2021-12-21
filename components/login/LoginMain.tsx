@@ -10,7 +10,6 @@ const LoginMain = () => {
   const [failAlert, setFailAlert] = useState(false);//알럿을 키고 끄는 state
 
   const pushBtn = () => {
-    console.log(id, psword);
     setDoLogin(true);
   };
   //로그인 로직 컴포넌트 실행
