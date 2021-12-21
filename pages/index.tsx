@@ -10,22 +10,14 @@ const Home: NextPage = () => {
   const [loginUser, setLoginUser] = useState({});/* 이 state는 유저정보를 가지고 있다 */
   /* console.log(loginUser) */
   axios.get("/api/isLogin").then(res => {
-    if(res.status === 200 && res.data.params){
-      console.log(res.data.params)
+    if(res.status === 200 && res.data.id){
+      console.log(res.data.id)
     }
   })
-
-  const test = () => {
-    axios.get('/api/logout').then(res => {
-      if(res.status === 200){
-        console.log("오케이")
-      }
-    })
-  }
+  
   return (
     <>
       <Main loginUser={loginUser} setLoginUser={setLoginUser} />
-      <button onClick={test}>logout</button>
     </>
   );
 };
