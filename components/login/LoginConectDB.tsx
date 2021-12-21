@@ -49,13 +49,16 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
         /* 아이디, 비밀번호가 맞으면 == 로그인이 성공하면 */
         axios.post("/api/login",{
           params:{
-            name:data.userByUserId.name
+            name:data.userByUserId.name,
+            psword:data.userByUserId.password,
+            id
           }
         }).then((res) => {
           if(res.status === 200){
-            console.log("pathOk")
+            console.log(res)
           }
         })
+        //데이터 보내서 쿠키로 만들거임
         router.push(
             {
               pathname: "/",
