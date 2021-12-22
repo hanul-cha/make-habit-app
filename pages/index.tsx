@@ -3,14 +3,18 @@ import { useState } from "react";
 import Main from "../components/main/Main";
 import styles from "../styles/Home.module.css";
 
-
-
 const Home: NextPage = () => {
-  const [loginUser, setLoginUser] = useState('');/* 이 state는 유저id를 가지고 있다 */
-  
+  const [loginUser, setLoginUser] = useState(""); /* 이 state는 유저id를 가지고 있다 */
+  const [userInfo, setUserInfo] = useState({});
+
   return (
     <>
-      <Main loginUser={loginUser} setLoginUser={setLoginUser} />
+      <Main
+        loginUser={loginUser}
+        userInfo={userInfo}
+        setLoginUser={setLoginUser}
+        setUserInfo={setUserInfo}
+      />
     </>
   );
 };

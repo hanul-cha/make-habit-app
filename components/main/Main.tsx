@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
+import UseGraphql from "../customhooks/UseGraphql";
+
 
 interface MainTypeProps {
-  loginUser: String;
+  loginUser: string;
+  userInfo:{}
   setLoginUser: (a: string) => void;
+  setUserInfo:(a:{}) => void
 }
 
-const Main = ({ loginUser, setLoginUser }: MainTypeProps) => {
+const Main = ({ loginUser, userInfo, setLoginUser, setUserInfo }: MainTypeProps) => {
   const router = useRouter();
+
+  
 
   let user = router.query;
   useEffect(() => {
@@ -23,7 +29,22 @@ const Main = ({ loginUser, setLoginUser }: MainTypeProps) => {
       }
     });
     //새로고침이나 라우트 이동후에 사용할 setState
+
+    
+
   }, []);
+
+  const { loading, data } = UseGraphql(loginUser)
+  console.log(loading, data)
+  
+  //위에거 대신에 state에 할당해보자
+  useEffect(() => {
+    if(!loading){
+      /* console.log(data.userByUserId) */
+      setUserInfo(data.userByUserId)
+      console.log(userInfo)
+    }
+  })
   
 
   const removeCookie = () => {

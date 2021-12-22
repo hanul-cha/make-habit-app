@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import axios  from "axios";
+import UseGraphql from "../customhooks/UseGraphql";
 
 interface LoginConectDbTypeProps {
   id: string;
@@ -9,16 +9,6 @@ interface LoginConectDbTypeProps {
   setFailAlert: (a: boolean) => void;
   setDoLogin: (a: boolean) => void;
 }
-
-const GET_USER_INFO = gql`
-  query MyQuery($userId: String!) {
-    userByUserId(userId: $userId) {
-      password
-      name
-    }
-  }
-`;
-//userId로 password를 리턴 받을것임
 
 const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 위한 컴포넌트로 아무것도 리턴하지 않는다 */
   id,
@@ -28,11 +18,8 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
 }: LoginConectDbTypeProps) => {
   const router = useRouter();
 
-  const { loading, data } = useQuery(GET_USER_INFO, {
-    variables: {
-      userId: id,
-    },
-  });
+  const { loading, data } = UseGraphql(id)
+  //graphql 쿼리가 있는 커스텀훅
 
   useEffect(() => {
     if (!loading) {
@@ -54,7 +41,7 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
           }
         }).then((res) => {
           if(res.status === 200){
-            console.log(res)
+            console.log("쿠키api로 전송완료")
           }
         })
         //데이터 보내서 쿠키로 만들거임
