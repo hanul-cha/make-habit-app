@@ -18,10 +18,8 @@ interface MainTypeProps {
 
 const Main = ({ loginUser, userInfo, setLoginUser, setUserInfo }: MainTypeProps) => {
   const router = useRouter();
-
-  
-
   let user = router.query;
+
   useEffect(() => {
     if (user.userId !== undefined) {
       setLoginUser(String(user.userId));
@@ -33,24 +31,30 @@ const Main = ({ loginUser, userInfo, setLoginUser, setUserInfo }: MainTypeProps)
       }
     });
     //새로고침이나 라우트 이동후에 사용할 setState
-
-    
-
   }, []);
+  /* 
+  graphql 서버로 날릴 쿼리 아이디를 뽑는 로직입니다
+  로그인을 시도해서 성공했다면 router로 들어온 아이디가 전달될것입니다
+  언마운트후 다시 마운트가 되는 시점이 올땐 쿠키에서 아이디를 가져와 전달될겁니다
+  */
 
-  const { loading, data } = UseGraphql(loginUser)
-  console.log(loading, data)
+  const { loading, data } = UseGraphql(loginUser) 
+  //아폴로 useQuery 통신방식입니다 loading이 false가 되면 data에 값이 들어옵니다.
+  /*
+  어떤값이 들어오는진 콘솔을 확인해주세요 
+  console.log(loading, data) 
+  */
   
-  //위에거 대신에 state에 할당해보자
   useEffect(() => {
     if(!loading){
-      /* console.log(data.userByUserId) */
       setUserInfo(data.userByUserId)
-      console.log(userInfo)
+      /* 
+      loading이 끝나면 실질적 유저 정보를 담는 state에 담아줍니다
+      console.log(userInfo) 
+      */
     }
   })
   
-
   const removeCookie = () => {
     axios.get("/api/logout").then((res) => {
       if (res.status === 200) {
