@@ -15,9 +15,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 + typescript
 
-+ graphql apollo
-    rest방식이 아닌 graphql방식을 사용했습니다.
-    graphql통신은 apollo-client를 사용했습니다.
++ ### graphql apollo
+ + rest방식이 아닌 graphql방식을 사용했습니다.
+ + graphql통신은 apollo-client를 사용했습니다.
 + postgres
     database는 postgres를 사용해 작성했습니다.
 + postgraphile
