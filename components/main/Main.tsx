@@ -7,9 +7,13 @@ import UseGraphql from "../customhooks/UseGraphql";
 
 interface MainTypeProps {
   loginUser: string;
-  userInfo:{}
+  userInfo:{
+    name?:string
+    password?:string
+    userId? :string
+  } | null | undefined
   setLoginUser: (a: string) => void;
-  setUserInfo:(a:{}) => void
+  setUserInfo:(a:any) => void
 }
 
 const Main = ({ loginUser, userInfo, setLoginUser, setUserInfo }: MainTypeProps) => {
@@ -59,9 +63,9 @@ const Main = ({ loginUser, userInfo, setLoginUser, setUserInfo }: MainTypeProps)
 
   return (
     <>
-      {loginUser !== "" /* 받은값이 있다면 밑에 컴포넌트를 실행 */ ? (
+      {userInfo !== null /* 받은값이 있다면 밑에 컴포넌트를 실행 */ ? (
         <div>
-          <h1>hi {loginUser}</h1>
+          <h1>hi {userInfo?.name}</h1>
           <button onClick={removeCookie}>logout</button>
         </div>
       ) : (
