@@ -11,19 +11,19 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## skill stack
-+ ##### next js
++ #### next js
 
-+ ##### typescript
++ #### typescript
 
-+ ##### graphql apollo
-rest방식이 아닌 graphql방식을 사용했습니다.  
-graphql통신은 apollo-client를 사용했습니다.  
-+ ##### postgres
-database는 postgres를 사용해 작성했습니다.  
-+ ##### postgraphile
-postgraphile는 postgres db를 graphql api 로 변환시키는 툴입니다.  
-graphql yoga로 간단한 api를 만들었다면 이툴은
-스키마, 함수작성등 대부분을 연결한 데이터베이스에 맞게 대신 작성해줍니다.
++ #### graphql apollo
+    rest방식이 아닌 graphql방식을 사용했습니다.  
+    graphql통신은 apollo-client를 사용했습니다.  
++ #### postgres
+    database는 postgres를 사용해 작성했습니다.  
++ #### postgraphile
+    postgraphile는 postgres db를 graphql api 로 변환시키는 툴입니다.  
+    graphql yoga로 간단한 api를 만들었다면 이툴은
+    스키마, 리졸버등 대부분을 연결한 데이터베이스에 맞게 대신 작성해줍니다.
 
 
 ## Deploy on Vercel
