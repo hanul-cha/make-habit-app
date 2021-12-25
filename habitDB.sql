@@ -54,8 +54,8 @@ INSERT INTO "myhabit" (
 	user_id, habit_title, habit_text, habit_week
 ) VALUES (
 	'ccchhh1234',
-	'알바하쟈',
-	'취미라고 하긴 뭐한데 일단 일하는날이야',
+	'출근전 커밋4개이상하기',
+	'유의미한 커밋을 남기기 바랄게',
   6
 );
 
