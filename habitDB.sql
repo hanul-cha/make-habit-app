@@ -50,4 +50,12 @@ INSERT INTO "myhabit" (
 	'6시까지 센터로 달려가!',
   5
 );
+INSERT INTO "myhabit" (
+	user_id, habit_title, habit_text, habit_week
+) VALUES (
+	'ccchhh1234',
+	'알바하쟈',
+	'취미라고 하긴 뭐한데 일단 일하는날이야',
+  6
+);
 

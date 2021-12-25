@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 const UseGraphql = (id: string) => {
