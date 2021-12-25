@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
 import UseGraphql from "../customhooks/UseGraphql";
+import TodayHabit from "./TodayHabit";
 
 
 interface MainTypeProps {
@@ -71,9 +72,9 @@ const Main = ({ loginUser, userInfo, setLoginUser, setUserInfo }: MainTypeProps)
         <div>
           <h1>hi {userInfo?.name}</h1>
           <button onClick={removeCookie}>logout</button>
+          <TodayHabit userId = {userInfo?.userId} />
         </div>
       ) : (
-        /* 여기에 다른 메인컴포넌트가 들어올것임 */
         <div>
           <h2>로그인이 필요합니다</h2>
           <Link href={"/login"}>로그인</Link>
