@@ -7,7 +7,7 @@ interface TodayHabitTypeProps {
 }
 
 const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
-  const [myhabit, setMyHabit] = useState();
+  const [myhabit, setMyHabit] = useState<any>();
   const GET_USER_INFO = gql`
     query MyQuery($userId: String!, $habitWeek: Int!) {
       userByUserId(userId: $userId) {
@@ -24,12 +24,12 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   `;
 
   let date = new Date();
-  const toDate = date.getDay() + 1;
+  const toDate = date.getDay() + 1; //오늘 요일
 
   const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {
       userId,
-      habitWeek: toDate,
+      habitWeek: 6,
     },
   });
 
@@ -39,9 +39,7 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
     }
   });
 
-  /* if (!myhabit == undefined) {
-    console.log(myhabit?.length);
-  } */
+  console.log(myhabit.length);
 
   return (
     <>
