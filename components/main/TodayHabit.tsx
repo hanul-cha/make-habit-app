@@ -40,11 +40,11 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   });
 
   console.log(myhabit?.length);
-  console.log(myhabit);
+  //myhabit 의 길이를 알고 싶으면 type지정를 좀 더 해야될거갗은데?
 
   return (
     <>
-      {myhabit?.length == 0?(
+      {/* {myhabit?.length == 0?(
             <div>
                 <h2>오늘의 활동이 없습니다</h2>
             </div>
@@ -55,8 +55,8 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
                   <h2>{habit.title}</h2>
                 })}
             </div>
-            /* 이부분 조금 바꿔야 할듯? */
-        )}
+            
+        )} */}
     </>
   );
 };
