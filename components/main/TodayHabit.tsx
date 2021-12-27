@@ -39,20 +39,24 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
     }
   });
 
-  console.log(myhabit.length);
+  console.log(myhabit?.length);
+  console.log(myhabit);
 
   return (
     <>
-      {/* {myhabit?.length == 0?(
+      {myhabit?.length == 0?(
             <div>
                 <h2>오늘의 활동이 없습니다</h2>
             </div>
         ):(
             <div>
                 <h2>오늘의 할일</h2>
-                <p></p>
+                {myhabit.map((habit: any) => {
+                  <h2>{habit.title}</h2>
+                })}
             </div>
-        )} */}
+            /* 이부분 조금 바꿔야 할듯? */
+        )}
     </>
   );
 };
