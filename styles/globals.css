@@ -73,3 +73,10 @@ table {
   border: 1px solid #434343;
 }
 
+.drawDiv{
+  background: red;
+  display: grid;
+  
+  place-items: center;
+}
+
