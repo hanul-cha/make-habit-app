@@ -6,8 +6,10 @@ interface TodayHabitTypeProps {
   userId: string | undefined;
 }
 
+
+
 const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
-  const [myhabit, setMyHabit] = useState<any>();
+  const [myhabit, setMyHabit] = useState<any[]>();
   const GET_USER_INFO = gql`
     query MyQuery($userId: String!, $habitWeek: Int!) {
       userByUserId(userId: $userId) {
@@ -24,7 +26,7 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   `;
 
   let date = new Date();
-  const toDate = date.getDay() + 1; //오늘 요일
+  const toDate = date.getDay(); //오늘 요일
 
   const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {
@@ -40,23 +42,25 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   });
 
   console.log(myhabit?.length);
+  if(myhabit !== undefined){
+    console.log(myhabit[0]);
+  }
+  
   //myhabit 의 길이를 알고 싶으면 type지정를 좀 더 해야될거갗은데?
 
   return (
     <>
-      {/* {myhabit?.length == 0?(
+      {myhabit?.length == 0?(
             <div>
                 <h2>오늘의 활동이 없습니다</h2>
             </div>
         ):(
             <div>
                 <h2>오늘의 할일</h2>
-                {myhabit.map((habit: any) => {
-                  <h2>{habit.title}</h2>
-                })}
+                <h3></h3>
             </div>
             
-        )} */}
+        )}
     </>
   );
 };
