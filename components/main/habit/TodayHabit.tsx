@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import UseGraphql from "../customhooks/UseGraphql";
 import DrawingHabit from "./DrawingHabit";
 
 interface TodayHabitTypeProps {
@@ -17,6 +16,7 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
             node {
               habitText
               habitTitle
+              habitId
             }
           }
         }
@@ -25,7 +25,8 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   `;
 
   let date = new Date();
-  const toDate = date.getDay(); //오늘 요일
+  const toDate = date.getDay(); 
+  //오늘 요일, 요넘이 habitWeek인자에 할당될것임
 
   const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {
@@ -50,8 +51,8 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   return (
     <>
       {myhabit && myhabit?.length !== 0 ? (
-        <div>
-          <h2>오늘의 할일</h2>
+        <div className="todayHabit_main">
+          <h2>매주해야될 오늘의 습관</h2>
           {myhabit.map((e, i) => {
             return (
               <DrawingHabit

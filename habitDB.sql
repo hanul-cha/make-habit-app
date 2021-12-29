@@ -27,6 +27,20 @@ CREATE TABLE "todolist" (
   PRIMARY KEY ("todo_id")
 );
 
+CREATE TABLE "habitcheck" (
+  "check_date" DATE NOT NULL,
+  "habit_id" INT NOT NULL,
+  "user_id" TEXT NOT NULL,
+  "check_id" SERIAL,
+  PRIMARY KEY ("check_id"),
+  CONSTRAINT "FK_habitcheck.habit_id"
+    FOREIGN KEY ("habit_id")
+      REFERENCES "myhabit"("habit_id"),
+  CONSTRAINT "FK_habitcheck.user_id"
+    FOREIGN KEY ("user_id")
+      REFERENCES "user"("user_id")
+);
+
 INSERT INTO "user" (
 	user_id, name, password
 ) VALUES (
