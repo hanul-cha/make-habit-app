@@ -50,8 +50,12 @@ table {
 	border-spacing: 0;
 }
 
+a{
+  text-decoration: none;
+}
+
 .layout{
-  width:600px;
+  max-width:600px;
   height: 100vh;
   margin: 0 auto;
   background: #fff;
@@ -78,5 +82,45 @@ table {
   display: grid;
   
   place-items: center;
+}
+
+.loginMainTitle{
+  text-align: center;
+  color: coral;
+  font-size: 37px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-weight: 600;
+}
+
+.pleaseLogin{
+  display: grid;
+  grid-template-rows: 4fr 3fr 3fr;
+  place-items: center;
+}
+
+.pleaseLoginTitle{
+  font-size: 30px;
+  text-align: center;
+}
+
+.pleaseLoginSection{
+  width: 50%;
+  margin-bottom: 20px;
+  /* background: red; */
+}
+
+.pleaseLoginSection p, .pleaseLoginSection h3{
+  margin-bottom: 10px;
+}
+
+.pleaseLoginInner{
+  color: coral;
+  font-size: 37px;
+  font-weight: 600;
+}
+
+.navStack{
+  z-index: 100;
 }
 

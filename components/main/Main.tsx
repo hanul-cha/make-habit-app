@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import UseGraphql from "../customhooks/UseGraphql";
 import TodayHabit from "./TodayHabit";
+import PleaseLogin from "./PleaseLogin";
 
 
 interface MainTypeProps {
@@ -75,10 +76,7 @@ const Main = ({ loginUser, userInfo, setLoginUser, setUserInfo }: MainTypeProps)
           <TodayHabit userId = {userInfo?.userId} />
         </div>
       ) : (
-        <div>
-          <h2>로그인이 필요합니다</h2>
-          <Link href={"/login"}>로그인</Link>
-        </div>
+        <PleaseLogin />
       )}
     </>
   );

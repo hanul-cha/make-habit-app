@@ -34,6 +34,8 @@ const LoginMain = () => {
         </Alert>
       )}
 
+      <h2 className="loginMainTitle">로그인</h2>
+
       <div className="loginField">
         <TextField
           className="textField"
