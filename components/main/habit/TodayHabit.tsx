@@ -25,13 +25,13 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   `;
 
   let date = new Date();
-  const toDate = date.getDay(); 
+  const toDate = 6; /* date.getDay() */ 
   //오늘 요일, 요넘이 habitWeek인자에 할당될것임
 
   const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {
       userId,
-      habitWeek: 6,
+      habitWeek: toDate,
     },
   });
 
@@ -58,6 +58,7 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
               <DrawingHabit
               e={e}
               key={i}
+              userId={userId}
               />
             );
           })}{/* 오늘할일 리스트를 그려줄 컴포넌트를 인자수만큼 실행 */}

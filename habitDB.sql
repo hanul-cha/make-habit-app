@@ -28,7 +28,7 @@ CREATE TABLE "todolist" (
 );
 
 CREATE TABLE "habitcheck" (
-  "check_date" DATE NOT NULL,
+  "check_date" TEXT NOT NULL,
   "habit_id" INT NOT NULL,
   "user_id" TEXT NOT NULL,
   "check_id" SERIAL,
@@ -65,11 +65,20 @@ INSERT INTO "myhabit" (
   5
 );
 INSERT INTO "myhabit" (
-	user_id, habit_title, habit_text, habit_week
+	user_id, habit_id, user_id, habit_week
 ) VALUES (
 	'ccchhh1234',
 	'출근전 커밋4개이상하기',
 	'유의미한 커밋을 남기기 바랄게',
   6
+);
+
+
+INSERT INTO "habitcheck" (
+	check_date, habit_id, user_id
+) VALUES (
+	'2022-01-01',
+	4,
+	'ccchhh1234'
 );
 
