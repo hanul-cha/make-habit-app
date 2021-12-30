@@ -103,6 +103,8 @@ a{
 .todayHabit_main{
   background: rgb(255, 211, 218);
   padding: 10px;
+  margin: 0 10px;
+  border-radius: 10px;
 }
 
 .todayHabit_main h2{
@@ -129,6 +131,9 @@ a{
 .draw_checkBTN{
   border: none;
   background: none;
+  width: 23px;
+  padding: 0;
+  margin-right: 10px;
 }
 
 

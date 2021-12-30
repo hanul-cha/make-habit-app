@@ -21,10 +21,17 @@ interface DrawingHabitType {
     node?: any;
     __typename?: string;
   };
-  userId: string | undefined;
 }
 
-const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
+interface DrawNodeType {
+  node?: {
+    checkDate?: string;
+    __typename?: string;
+  };
+  __typename?: string;
+}
+
+const DrawingHabit = ({ e }: DrawingHabitType) => {
   const [open, setOpen] = React.useState(false); //클릭여부를 저장하는 state
   const [habitCheck, setHabitCheck] = React.useState(false); //체크여부를 판단하는 state
 
@@ -39,21 +46,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
       }
     }
   `;
-
-  /* 
-  """ query MyQuery($userId: String!, $habitId: Int!) {
-      userByUserId(userId: $userId) {
-        habitchecksByUserId(condition: { habitId: $habitId }) {
-          edges {
-            node {
-              checkDate
-              habitId
-            }
-          }
-        }
-      }
-    } """
-  */
+  //해당 컴포넌트에 들어온 myhabit데이터의 pk값을 대입해 habitcheck의 fk값과 대조해 데이터를 가져온다
 
   const habitId = e?.node?.habitId;
   /* console.log(habitId); */
@@ -66,8 +59,15 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
 
   React.useEffect(() => {
     if (!loading) {
-      console.log(data);
-      //데이터가 있으면서 오늘날자랑 맞았을때 state를 변화 시켜야함
+      if (data.allHabitchecks.edges.length !== 0) {
+        data.allHabitchecks.edges.map((node: DrawNodeType) => {
+          console.log(node);
+          if (node.node?.checkDate == "2022-01-01") {
+            //오늘날자가 들어가야함
+            setHabitCheck(true);
+          }
+        });
+      }
     }
   });
 
@@ -75,13 +75,21 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
     setOpen(!open);
   }; //클릭하면 밑으로 리스트를 보여줄것임
 
-  const test = (checkE: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const runCheck = (checkE: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     checkE.stopPropagation();
     if (habitCheck == false) {
-      setHabitCheck(true);
+      if (!loading) {
+        if (data.allHabitchecks.edges.length == 0) {
+          console.log("저장된 체크리스트가 없습니다");
+          setHabitCheck(true);
+        } else {
+          console.log(" 이미 체크 하셨습니다");
+        }
+      }
     }
   };
   /* console.log(e); */
+
   return (
     <>
       {e && (
@@ -96,7 +104,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
               {/* 취미제목 */}
               <button
                 className="draw_checkBTN"
-                onClick={(checkE) => test(checkE)}
+                onClick={(checkE) => runCheck(checkE)}
               >
                 {habitCheck ? (
                   <BatteryChargingFullIcon />

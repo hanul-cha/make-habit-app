@@ -58,7 +58,6 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
               <DrawingHabit
               e={e}
               key={i}
-              userId={userId}
               />
             );
           })}{/* 오늘할일 리스트를 그려줄 컴포넌트를 인자수만큼 실행 */}
