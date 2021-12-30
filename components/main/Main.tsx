@@ -6,6 +6,7 @@ import UseGraphql from "../customhooks/UseGraphql";
 import TodayHabit from "./habit/TodayHabit";
 import PleaseLogin from "./PleaseLogin";
 import { Button } from "@mui/material";
+import LastWeek from "./lastWeek/LastWeek";
 
 interface MainTypeProps {
   loginUser: string;
@@ -95,6 +96,7 @@ const Main = ({
           </div>
           <TodayHabit userId={userInfo?.userId} />
           {/* 그려질 첫컴포넌트론 오늘의 할일을 그려줄것임 */}
+          <LastWeek />
         </div>
       ) : (
         <PleaseLogin />

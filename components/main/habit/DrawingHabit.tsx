@@ -25,7 +25,7 @@ interface DrawingHabitType {
 
 interface DrawNodeType {
   node?: {
-    checkDate?: string;
+    checkDate?: number;
     __typename?: string;
   };
   __typename?: string;
@@ -61,15 +61,20 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
     if (!loading) {
       if (data.allHabitchecks.edges.length !== 0) {
         data.allHabitchecks.edges.map((node: DrawNodeType) => {
-          console.log(node);
-          if (node.node?.checkDate == "2022-01-01") {
+          if (node.node?.checkDate == 20220101) {
             //오늘날자가 들어가야함
             setHabitCheck(true);
+          } else {
+            /* setHabitCheck(false); */
           }
         });
       }
     }
   });
+  /* 
+  이로직은 처음 실행되고나서 쿼리로딩이 끝나면
+  조건에 맞는 데이터가 있다면 체크 표시를 해주는 로직임
+  */
 
   const handleClick = () => {
     setOpen(!open);
@@ -81,9 +86,10 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
       if (!loading) {
         if (data.allHabitchecks.edges.length == 0) {
           console.log("저장된 체크리스트가 없습니다");
+          //알럿을 올려두고 오케이하면 뮤테이션 실행후 체크 추가
           setHabitCheck(true);
         } else {
-          console.log(" 이미 체크 하셨습니다");
+          console.log(" 이미 체크 하셨습니다 체크 해제 하시겠습니까?");
         }
       }
     }

@@ -28,7 +28,7 @@ CREATE TABLE "todolist" (
 );
 
 CREATE TABLE "habitcheck" (
-  "check_date" TEXT NOT NULL,
+  "check_date" INT NOT NULL,
   "habit_id" INT NOT NULL,
   "user_id" TEXT NOT NULL,
   "check_id" SERIAL,
@@ -77,8 +77,29 @@ INSERT INTO "myhabit" (
 INSERT INTO "habitcheck" (
 	check_date, habit_id, user_id
 ) VALUES (
-	'2022-01-01',
+	'20220101',
 	4,
+	'ccchhh1234'
+);
+INSERT INTO "habitcheck" (
+	check_date, habit_id, user_id
+) VALUES (
+	'20211225',
+	4,
+	'ccchhh1234'
+);
+INSERT INTO "habitcheck" (
+	check_date, habit_id, user_id
+) VALUES (
+	'20211225',
+	3,
+	'ccchhh1234'
+);
+INSERT INTO "habitcheck" (
+	check_date, habit_id, user_id
+) VALUES (
+	'20211224',
+	2,
 	'ccchhh1234'
 );
 
