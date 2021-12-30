@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 interface LastWeekTypeProps {
@@ -10,7 +10,7 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
   const year = date.getFullYear();
   const month = ("0" + (1 + date.getMonth())).slice(-2);
   const day = ("0" + date.getDate()).slice(-2);
-  const today = Number(year+month+day)
+  const today = Number(year + month + day);
 
   const GET_WEEK_HABIT = gql`
     query MyQuery($userId: String!) {
@@ -18,6 +18,7 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
         myhabitsByUserId {
           nodes {
             habitText
+            habitId
           }
         }
       }
@@ -27,9 +28,9 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
   const GET_CHECK_HABIT = gql`
     query MyQuery($userId: String!) {
       userByUserId(userId: $userId) {
-        myhabitsByUserId {
+        habitchecksByUserId {
           nodes {
-            habitText
+            checkDate
           }
         }
       }
@@ -37,15 +38,32 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
   `;
   //현재 유저가 가진 모든 체크 리스트를 가져올것임
 
+  const weelLoad = useQuery(GET_WEEK_HABIT, {
+    variables: {
+      userId,
+    },
+  });
 
+  const checkLoad = useQuery(GET_CHECK_HABIT, {
+    variables: {
+      userId,
+    },
+  });
 
+  useEffect(()=>{
+    if (!weelLoad.loading && !checkLoad.loading && userId !== undefined) {
+        console.log(weelLoad.data);
+        console.log(checkLoad.data);
+      }
+  })
+
+  
 
   console.log(userId);
   return <div></div>;
 };
 
 export default LastWeek;
-
 
 /* 
 실험해봐야할것

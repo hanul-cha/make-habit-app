@@ -26,7 +26,7 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   `;
 
   let date = new Date();
-  const toDate = 6; /* date.getDay() */ 
+  const toDate = 6; /* date.getDay() */
   //오늘 요일, 요넘이 habitWeek인자에 할당될것임
 
   const { loading, data } = useQuery(GET_USER_INFO, {
@@ -55,24 +55,17 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
         <div className="todayHabit_main">
           <h2>매주해야될 오늘의 습관</h2>
           {myhabit.map((e, i) => {
-            return (
-              <DrawingHabit
-              e={e}
-              key={i}
-              />
-            );
-          })}{/* 오늘할일 리스트를 그려줄 컴포넌트를 인자수만큼 실행 */}
+            return <DrawingHabit e={e} key={i} />;
+          })}
+          {/* 오늘할일 리스트를 그려줄 컴포넌트를 인자수만큼 실행 */}
         </div>
       ) : (
         <div className="noHabit">
           <h2>오늘의 활동이 없습니다</h2>
-          <Button
-              className="login_btn"
-              variant="outlined"
-              
-            >
-              추가하기!!
-            </Button>
+          <Button className="login_btn" variant="outlined">
+            추가하기!!
+          </Button>
+          {/* 여기에 뮤테이트 추가 해야함 */}
         </div>
       )}
     </>

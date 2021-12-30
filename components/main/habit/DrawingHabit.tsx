@@ -141,4 +141,6 @@ export default DrawingHabit;
 
 /* 
 오늘 할일이 있다면 그려줄 컴포넌트
+
+이 컴포넌트의 큐테이트 아직 미완성
 */
