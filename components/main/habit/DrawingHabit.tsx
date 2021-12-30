@@ -80,18 +80,19 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
     setOpen(!open);
   }; //클릭하면 밑으로 리스트를 보여줄것임
 
-  const runCheck = (checkE: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const runCheck = (
+    checkE: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     checkE.stopPropagation();
+
     if (habitCheck == false) {
       if (!loading) {
-        if (data.allHabitchecks.edges.length == 0) {
-          console.log("저장된 체크리스트가 없습니다");
-          //알럿을 올려두고 오케이하면 뮤테이션 실행후 체크 추가
-          setHabitCheck(true);
-        } else {
-          console.log(" 이미 체크 하셨습니다 체크 해제 하시겠습니까?");
-        }
+        console.log("저장된 체크리스트가 없습니다");
+        //알럿을 올려두고 오케이하면 뮤테이션 실행후 체크 추가
+        setHabitCheck(true);
       }
+    } else {
+      console.log(" 이미 체크 하셨습니다 체크 해제 하시겠습니까?");
     }
   };
   /* console.log(e); */

@@ -121,6 +121,18 @@ a{
 }
 /* 섹션별 margin은 30px로 고정 */
 
+.noHabit{
+  background: rgb(255, 211, 218);
+  padding: 10px;
+  margin: 0 10px;
+  border-radius: 10px;
+}
+
+.login_btn{
+  margin-top: 10px;
+  background: #fff;
+}
+
 /* drawingHabit 
    오늘의 할일부분
 */

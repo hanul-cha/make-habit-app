@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import DrawingHabit from "./DrawingHabit";
+import { Button } from "@mui/material";
 
 interface TodayHabitTypeProps {
   userId: string | undefined;
@@ -63,9 +64,15 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
           })}{/* 오늘할일 리스트를 그려줄 컴포넌트를 인자수만큼 실행 */}
         </div>
       ) : (
-        <div>
+        <div className="noHabit">
           <h2>오늘의 활동이 없습니다</h2>
-          <button>추가하기!</button>
+          <Button
+              className="login_btn"
+              variant="outlined"
+              
+            >
+              추가하기!!
+            </Button>
         </div>
       )}
     </>

@@ -48,6 +48,13 @@ INSERT INTO "user" (
 	'차한울',
 	'123456'
 );
+INSERT INTO "user" (
+	user_id, name, password
+) VALUES (
+	'ssssss1234',
+	'김선민',
+	'123456'
+);
 INSERT INTO "myhabit" (
 	user_id, habit_title, habit_text, habit_week
 ) VALUES (
