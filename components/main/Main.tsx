@@ -96,7 +96,8 @@ const Main = ({
           </div>
           <TodayHabit userId={userInfo?.userId} />
           {/* 그려질 첫컴포넌트론 오늘의 할일을 그려줄것임 */}
-          <LastWeek />
+          <LastWeek userId={userInfo?.userId} />
+          {/* 저번주와 비교하는 컴포넌트 */}
         </div>
       ) : (
         <PleaseLogin />

@@ -77,28 +77,28 @@ INSERT INTO "myhabit" (
 INSERT INTO "habitcheck" (
 	check_date, habit_id, user_id
 ) VALUES (
-	'20220101',
+	20220101,
 	4,
 	'ccchhh1234'
 );
 INSERT INTO "habitcheck" (
 	check_date, habit_id, user_id
 ) VALUES (
-	'20211225',
+	20211225,
 	4,
 	'ccchhh1234'
 );
 INSERT INTO "habitcheck" (
 	check_date, habit_id, user_id
 ) VALUES (
-	'20211225',
+	20211225,
 	3,
 	'ccchhh1234'
 );
 INSERT INTO "habitcheck" (
 	check_date, habit_id, user_id
 ) VALUES (
-	'20211224',
+	20211224,
 	2,
 	'ccchhh1234'
 );
