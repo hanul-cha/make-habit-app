@@ -54,6 +54,10 @@ a{
   text-decoration: none;
 }
 
+*{
+  color: #434343;
+}
+
 /* 제일상단레이아웃 */
 .layout{
   max-width:600px;
@@ -105,9 +109,11 @@ a{
   padding: 10px;
   margin: 0 10px;
   border-radius: 10px;
+  margin-bottom: 30px;
 }
 
 .todayHabit_main h2{
+  font-weight: 600;
   margin-bottom: 10px;
 }
 
@@ -127,6 +133,9 @@ a{
   margin: 0 10px;
   border-radius: 10px;
   margin-bottom: 30px;/* 바로 아래 컨텐츠와의 마진 */
+}
+.noHabit h2 {
+  font-weight: 600;
 }
 
 .login_btn{
@@ -183,10 +192,26 @@ a{
   margin: 0 10px;
   border-radius: 10px;
 }
+.noLastWeekHabit h2 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.noLastWeekHabit p {
+  font-size: 14px;
+}
 
 .lastWeek_btn{
   margin-top: 10px;
   background: #fff;
+}
+
+/* drawingLastWeek */
+.lastWeek {
+  background: rgb(177, 189, 252);
+  padding: 10px;
+  margin: 0 10px;
+  border-radius: 10px;
 }
 
 

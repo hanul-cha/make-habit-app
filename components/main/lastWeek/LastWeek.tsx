@@ -55,23 +55,27 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
     },
   }); //이거 그냥 가져와서 저번주 아닌거 날린다음 남은거랑 위에 쿼리랑 map두번 돌려서 남겨야 할듯함
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!weekLoad.loading && !checkLoad.loading && userId !== undefined) {
       console.log(weekLoad.data);
       console.log(checkLoad.data);
     }
-  });
+  }); */
 
-  console.log(userId);
+  /* console.log(userId); */
   return (
     <>
       {weekLoad.data !== undefined && checkLoad.data !== undefined ? (
         <>
           {weekLoad.data.userByUserId.myhabitsByUserId.nodes.length !== 0 ? (
-            <DrawingLastWeek />
+            <DrawingLastWeek
+              myHabitList={weekLoad.data.userByUserId.myhabitsByUserId.nodes}
+              habitCheckList={checkLoad.data.userByUserId.habitchecksByUserId.nodes}
+            />
           ) : (
             <div className="noLastWeekHabit">
-              <h2>오늘의 활동이 없습니다</h2>
+              <h2>저번주에 해야할 습관이 없습니다.</h2>
+              <p>혹시 아직 일정 추가를 안하셨나요?</p>
               <Button className="lastWeek_btn" variant="outlined">
                 추가하기!!
               </Button>
