@@ -14,7 +14,7 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
       userByUserId(userId: $userId) {
         myhabitsByUserId {
           nodes {
-            habitText
+            habitTitle
             habitId
           }
         }

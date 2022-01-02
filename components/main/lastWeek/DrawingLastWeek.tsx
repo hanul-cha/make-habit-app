@@ -17,7 +17,7 @@ import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull";
 
 interface myHabitListType {
   habitId?: number;
-  habitText?: string;
+  habitTitle?: string;
   __typename?: string;
 }
 
@@ -55,11 +55,10 @@ const DrawingLastWeek = ({
   //오늘날짜
 
   const lastWeek = () => {
-    const lastWeekDate = new Date("2022-01-02");
-    console.log(lastWeekDate.getDate());
+    const lastWeekDate = new Date("2022-01-01");
     const getDay = lastWeekDate.getDay();
-    const newDate = lastWeekDate.getDate() - getDay + (getDay == 0 ? -6 : 1) -7;
-    
+    const newDate =
+      lastWeekDate.getDate() - getDay + (getDay == 0 ? -6 : 1) - 7;
     const lastDate = new Date(lastWeekDate.setDate(newDate));
     const newYear = lastDate.getFullYear();
     const newMonth = ("0" + (1 + lastDate.getMonth())).slice(-2);
@@ -71,23 +70,46 @@ const DrawingLastWeek = ({
 
   lastWeek();
 
-  const myLastWeekList = habitCheckList.filter((node) => node.checkDate);
+  const myLastWeekList = habitCheckList.filter(
+    (node) =>
+      node.checkDate &&
+      node.checkDate >= lastWeek() &&
+      node.checkDate < lastWeek() + 7
+  ); //저번주 월요일부터 일요일까지의 기록들
+
+  console.log(myLastWeekList);
 
   return (
     <div className="lastWeek">
+      <h2>저번주 달성률</h2>
       <List
-        sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        className="lastWeelList"
+        sx={{ width: "100%", bgcolor: "background.paper" }}
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
         <ListItemButton onClick={handleClick}>
-          <ListItemText primary="아몰랑" />
-          {/* 취미제목 */}
-          {open ? <ExpandLess /> : <ExpandMore />}
+          <ListItemText
+            primary={(myLastWeekList.length / myHabitList.length) * 100 + "%"}
+          />
+          {/* 퍼센트를 보여줄 공간 */}
+          {open ? <ExpandLess /> : "자세히보기"}
         </ListItemButton>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <div>dkah</div>
+          <div>
+            <div>
+              <h3>저번주에 해야했던 습관</h3>
+              {myHabitList.map((list, i) => {
+                return (
+                  <div key={i}>
+                    <h4>{list.habitTitle}</h4>
+                    {}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </Collapse>
       </List>
     </div>
@@ -95,3 +117,8 @@ const DrawingLastWeek = ({
 };
 
 export default DrawingLastWeek;
+
+/* 
+list.habitId == weekList.myhabitByHabitId?.habitId이걸 이용한 for문을 전개하자
+다른 요일로 테스트 해봐야함
+*/
