@@ -35,6 +35,13 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
   const [open, setOpen] = React.useState(false); //클릭여부를 저장하는 state
   const [habitCheck, setHabitCheck] = React.useState(false); //체크여부를 판단하는 state
 
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = ("0" + (1 + date.getMonth())).slice(-2);
+  const day = ("0" + date.getDate()).slice(-2);
+  const today = Number(year + month + day);
+
   const GET_USER_INFO = gql`
     query MyQuery($habitId: Int!) {
       allHabitchecks(condition: { habitId: $habitId }) {
@@ -62,7 +69,7 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
       if (data.allHabitchecks.edges.length !== 0) {
         data.allHabitchecks.edges.map((node: DrawNodeType) => {
           if (node.node?.checkDate == 20220101) {
-            //오늘날자가 들어가야함
+            //오늘날자가 들어가야함 today이거
             setHabitCheck(true);
           } else {
             /* setHabitCheck(false); */
@@ -107,7 +114,7 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
             aria-labelledby="nested-list-subheader"
           >
             <ListItemButton onClick={handleClick}>
-              <ListItemText primary={e.node.habitTitle} />
+              <ListItemText className="drawListTitle" primary={e.node.habitTitle} />
               {/* 취미제목 */}
               <button
                 className="draw_checkBTN"
