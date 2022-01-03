@@ -86,6 +86,16 @@ a{
   place-items: center;
 }
 
+.loginMainTitle{
+  text-align: center;
+  color: coral;
+  font-size: 37px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-weight: 600;
+}
+/* 섹션별 margin은 30px로 고정 */
+
 /* main */
 .main_successLogin{/* 사실상 제일 첨에 보여줄곳의 css */
   
@@ -130,16 +140,6 @@ a{
 .drawListTitle span{
   font-weight: 600;
 }
-
-.loginMainTitle{
-  text-align: center;
-  color: coral;
-  font-size: 37px;
-  margin-bottom: 30px;
-  margin-top: 30px;
-  font-weight: 600;
-}
-/* 섹션별 margin은 30px로 고정 */
 
 .noHabit{
   background: rgb(255, 211, 218);
@@ -298,6 +298,35 @@ a{
   align-items: center;
 }
 
+
+/* join */
+.joinMainTitle{
+  text-align: center;
+  color: coral;
+  font-size: 37px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-weight: 600;
+}
+
+.joinTextField{
+  display: block;
+  width: 50%;
+}
+
+.joinTextField>div {
+  width: 100%;
+}
+
+.joinField{
+  display: grid;
+  grid-template-rows: 70px 70px 70px 40px;
+  place-items: center;
+}
+
+.join_btn{
+  background: #fff;
+}
 
 
 
