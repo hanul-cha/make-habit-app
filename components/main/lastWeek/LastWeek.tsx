@@ -48,13 +48,14 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
     variables: {
       userId,
     },
-  }); //이거 그냥 가져와서 저번주 아닌거 날린다음 남은거랑 위에 쿼리랑 map두번 돌려서 남겨야 할듯함
+  });
 
   /* useEffect(() => {
     if (!weekLoad.loading && !checkLoad.loading && userId !== undefined) {
       console.log(weekLoad.data);
       console.log(checkLoad.data);
     }
+    //값 확인할때 풀어줄 주석입니다.
   }); */
 
   /* console.log(userId); */
@@ -74,7 +75,7 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
               <Button className="lastWeek_btn" variant="outlined">
                 추가하기!!
               </Button>
-              {/* 여기에 뮤테이트 추가 해야함 */}
+              {/* 여기에 뮤테이트 추가 해야함 여기에서 사용할 뮤테이션은 커스텀훅으로 만드는게 좋아보임 */}
             </div>
           )}
         </>
@@ -86,6 +87,14 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
 };
 
 export default LastWeek;
+
+/* 
+jsx 리턴 해석
+어떤 값이 들어올지 모르기 때문에 전부 네로잉 해주느라 조금 복잡해 보일수 있다.
+다른 컴포넌트는 로딩이 끝나면 새로운 state에 할당해주었는데 어짜피 네로잉은 해야되고
+하위 컴포넌트로 값들을 넘겨주고나서도 하위 컴포넌트에서 네로잉을 또해야되서
+새롭게 시도해보았는데 훨씬 좋은거같기도 하다
+*/
 
 /* 
 실험해봐야할것

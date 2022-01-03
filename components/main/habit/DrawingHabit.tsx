@@ -42,7 +42,7 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
   const year = date.getFullYear();
   const month = ("0" + (1 + date.getMonth())).slice(-2);
   const day = ("0" + date.getDate()).slice(-2);
-  const today = Number(year + month + day);
+  const today = Number(year + month + day);//오늘날짜
 
   const GET_USER_INFO = gql`
     query MyQuery($habitId: Int!) {
@@ -71,7 +71,7 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
       if (data.allHabitchecks.edges.length !== 0) {
         data.allHabitchecks.edges.map((node: DrawNodeType) => {
           if (node.node?.checkDate == 20220101) {
-            //오늘날자가 들어가야함 today이거
+            //오늘날자가 들어가야함 today, 지금들어가 있는건 테스트를 위한 값임
             setHabitCheck(true);
           } else {
             /* setHabitCheck(false); */
@@ -104,6 +104,11 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
       console.log(" 이미 체크 하셨습니다 체크 해제 하시겠습니까?");
     }
   };
+  /* 
+  체크된게 있다면 마운트되었을때 이미 habitCheck를 true로 바꿔줄테니 
+  graphql로딩이 끝나기만 기다렸다가(체크값 반영이 완료되면) 
+  체크값만 보고 실행하면된다!
+  */
   /* console.log(e); */
 
   return (
@@ -151,5 +156,5 @@ export default DrawingHabit;
 /* 
 오늘 할일이 있다면 그려줄 컴포넌트
 
-이 컴포넌트의 큐테이트 아직 미완성
+이 컴포넌트의 뮤테이트 아직 미완성
 */
