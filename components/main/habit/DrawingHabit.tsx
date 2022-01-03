@@ -14,6 +14,8 @@ import StarBorder from "@mui/icons-material/StarBorder";
 import DoubleArrowRoundedIcon from "@mui/icons-material/DoubleArrowRounded";
 import BatteryCharging20Icon from "@mui/icons-material/BatteryCharging20";
 import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull";
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { useQuery, gql } from "@apollo/client";
 
 interface DrawingHabitType {
@@ -121,9 +123,9 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
                 onClick={(checkE) => runCheck(checkE)}
               >
                 {habitCheck ? (
-                  <BatteryChargingFullIcon />
+                  <CheckBoxIcon />
                 ) : (
-                  <BatteryCharging20Icon />
+                  <CheckBoxOutlineBlankIcon />
                 )}
                 {/* 체크여부에 따라 다른 아이콘을 노출 시킬것임 */}
               </button>

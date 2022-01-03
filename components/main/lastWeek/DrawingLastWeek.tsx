@@ -4,6 +4,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 
 interface myHabitListType {
   habitId?: number;
@@ -35,8 +37,6 @@ const DrawingLastWeek = ({
     setOpen(!open);
   }; //클릭하면 밑으로 리스트를 보여줄것임
 
-  console.log(myHabitList, habitCheckList);
-
   const date = new Date();
   const year = date.getFullYear();
   const month = ("0" + (1 + date.getMonth())).slice(-2);
@@ -45,7 +45,7 @@ const DrawingLastWeek = ({
   //오늘날짜
 
   const lastWeek = (plus:number) => {
-    const lastWeekDate = new Date("2022-01-01");
+    const lastWeekDate = new Date("2022-01-01");//테스트를 위한 날짜
     const getDay = lastWeekDate.getDay();
     const newDate = lastWeekDate.getDate() - getDay + (getDay == 0 ? -6 : 1) - 7 + plus; 
     /* 
@@ -60,8 +60,6 @@ const DrawingLastWeek = ({
     const lastWeekDay = Number(newYear + newMonth + newDay);
     return lastWeekDay;
   }; //저번주 월요일날짜
-
-  console.log(lastWeek(7))
 
   const myLastWeekList = habitCheckList.filter(
     (node) =>
@@ -109,9 +107,15 @@ const DrawingLastWeek = ({
                   <div className="lastWeekListLI" key={i}>
                     <h4>{list.habitTitle}</h4>
                     {weekListChecker ? (
-                      <p>하셨군요!!</p>
+                      <p>
+                        <SentimentVerySatisfiedIcon />
+                        <span>하셨군요!!</span>
+                      </p>
                     ):(
-                      <p>다음엔 꼭!!</p>
+                      <p>
+                        <SentimentSatisfiedIcon />
+                        <span>다음엔 꼭!!</span>
+                      </p>
                     )}
                    
                   </div>

@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import JoinMain from "../components/join/JoinMain";
 
 const join = () => {
-    return (
-        <div>
-            join
-        </div>
-    )
-}
+  return (
+    <>
+      <JoinMain />
+    </>
+  );
+};
 
-export default join
+export default join;

@@ -61,10 +61,11 @@ a{
 /* 제일상단레이아웃 */
 .layout{
   max-width:600px;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   margin: 0 auto;
   background: #fff;
-  padding-bottom: 50px; /* 교체의 여지가 있음 */
+  padding-bottom: 50px;
 }
 
 
@@ -75,11 +76,14 @@ a{
   width: 50%;
 }
 
+.textField>div {
+  width: 100%;
+}
+
 .loginField{
   display: grid;
   grid-template-rows: 70px 70px 40px;
   place-items: center;
-  
 }
 
 /* main */
@@ -91,7 +95,11 @@ a{
   margin: 30px 10px;
   display: grid;
   grid-template-columns: 5fr 1fr;
-  
+  align-items: center;
+}
+
+.login_btn{
+  background: #fff;
 }
 
 .main_userSpan{
@@ -144,10 +152,7 @@ a{
   font-weight: 600;
 }
 
-.login_btn{
-  margin-top: 10px;
-  background: #fff;
-}
+
 
 /* drawingHabit 
    오늘의 할일부분
@@ -277,7 +282,7 @@ a{
   display: grid;
   padding: 20px 0;
   align-items: center;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 3fr 1fr;
   
 }
 .lastWeekListLI h4 {
@@ -288,6 +293,9 @@ a{
   /* background: red; */
   text-align: center;
   margin-right: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
 }
 
 
