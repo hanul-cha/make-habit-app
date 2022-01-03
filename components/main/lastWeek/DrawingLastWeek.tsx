@@ -54,30 +54,32 @@ const DrawingLastWeek = ({
   const today = Number(year + month + day);
   //오늘날짜
 
-  const lastWeek = () => {
+  const lastWeek = (plus:number) => {
     const lastWeekDate = new Date("2022-01-01");
     const getDay = lastWeekDate.getDay();
-    const newDate =
-      lastWeekDate.getDate() - getDay + (getDay == 0 ? -6 : 1) - 7;
+    const newDate = lastWeekDate.getDate() - getDay + (getDay == 0 ? -6 : 1) - 7 + plus; 
+    /* 
+    로직풀이 : 오늘 날자에 요일인덱스에 오늘날자를 빼고 일요일일때를 빼고 전부 
+    월요일인덱스(1)로 빼주면 이번주 월요일을 얻을수 있음 거기서 일주일을 빼면
+    오늘날짜의 저번주 월요일을 얻을수 있다 plus의경우 일주일 간격을 보기위해 넣어주었음
+    */
     const lastDate = new Date(lastWeekDate.setDate(newDate));
     const newYear = lastDate.getFullYear();
     const newMonth = ("0" + (1 + lastDate.getMonth())).slice(-2);
     const newDay = ("0" + lastDate.getDate()).slice(-2);
     const lastWeekDay = Number(newYear + newMonth + newDay);
-    console.log(lastWeekDay);
     return lastWeekDay;
   }; //저번주 월요일날짜
 
-  lastWeek();
+  console.log(lastWeek(7))
 
   const myLastWeekList = habitCheckList.filter(
     (node) =>
       node.checkDate &&
-      node.checkDate >= lastWeek() &&
-      node.checkDate < lastWeek() + 7
-  ); //저번주 월요일부터 일요일까지의 기록들
+      node.checkDate >= lastWeek(0) &&
+      node.checkDate < lastWeek(7)
+  ); //저번주 월요일부터 일요일까지의 기록들로 걸러주는 필터함수
 
-  console.log(myLastWeekList);
 
   return (
     <div className="lastWeek">
@@ -101,13 +103,25 @@ const DrawingLastWeek = ({
             <div>
               <h3>저번주에 해야했던 습관</h3>
               {myHabitList.map((list, i) => {
+                let weekListChecker = false;
+                myLastWeekList.map(nodes=> {
+                  if(nodes.myhabitByHabitId?.habitId == list.habitId){
+                    weekListChecker = true
+                  }
+                  
+                })
                 return (
                   <div key={i}>
                     <h4>{list.habitTitle}</h4>
-                    {}
+                    {weekListChecker ? (
+                      <p>했구나!</p>
+                    ):(
+                      <p>안했구나</p>
+                    )}
+                   
                   </div>
                 );
-              })}
+              })}{/* map끝 */}
             </div>
           </div>
         </Collapse>
@@ -119,6 +133,5 @@ const DrawingLastWeek = ({
 export default DrawingLastWeek;
 
 /* 
-list.habitId == weekList.myhabitByHabitId?.habitId이걸 이용한 for문을 전개하자
 다른 요일로 테스트 해봐야함
 */
