@@ -320,7 +320,7 @@ a{
 
 .joinField{
   display: grid;
-  grid-template-rows: 70px 70px 70px 40px;
+  grid-template-rows: 70px 70px 70px 70px 40px;
   place-items: center;
 }
 

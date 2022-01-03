@@ -4,6 +4,7 @@ import JoinDB from "./JoinDB";
 
 const JoinMain = () => {
   const [joinId, joinSetId] = useState("");
+  const [joinName, joinSetName] = useState("");
   const [joinPsword, joinSetpsword] = useState("");
   const [joinPswordCheck, joinSetpswordCheck] = useState("");
   const [runJoin, setRunJoin] = useState(false);
@@ -38,6 +39,16 @@ const JoinMain = () => {
           name="id"
           onChange={(e) => joinSetId(e.target.value)}
         />
+        
+        <TextField
+          className="joinTextField"
+          id="outlined-basic"
+          label="name"
+          variant="outlined"
+          placeholder="user name"
+          name="name"
+          onChange={(e) => joinSetName(e.target.value)}
+        />
 
         <TextField
           className="joinTextField"
@@ -67,6 +78,7 @@ const JoinMain = () => {
       </div>
       {runJoin && <JoinDB
         joinId={joinId}
+        joinName={joinName}
         joinPsword={joinPsword}
         joinPswordCheck={joinPswordCheck}
         setRunJoin={setRunJoin}
