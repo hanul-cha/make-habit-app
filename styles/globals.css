@@ -64,6 +64,7 @@ a{
   height: 100vh;
   margin: 0 auto;
   background: #fff;
+  padding-bottom: 50px; /* 교체의 여지가 있음 */
 }
 
 
@@ -211,6 +212,7 @@ a{
   background: #fff;
 }
 
+
 /* drawingLastWeek */
 .lastWeek {
   background: rgb(177, 189, 252);
@@ -225,6 +227,70 @@ a{
   margin-bottom: 10px;
   font-size: 20px;
 }
+
+.lastWeekSubTitle span {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.lastWeekList{
+ /*  background: pink; */
+}
+
+.drawingLastWeekSlide{
+  /* background: rgb(232, 236, 255); */
+  margin: 0 8px;
+  padding-top: 10px;
+}
+
+.drawingLastWeekSlide h3 {
+  font-size: 17px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  border-bottom: solid 3px rgb(232, 236, 255);
+}
+
+.lastWeekTableHeader{
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  margin: 10px 0;
+}
+
+.lastWeekTableHeader h4 {
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.lastWeekTableHeader p {
+  text-align: center;
+  padding-right: 10px;
+}
+
+.lastWeekUL{
+  /* background: yellow; */
+  display: grid;
+  row-gap: 10px;
+}
+
+.lastWeekListLI{
+  background: rgb(232, 236, 255);
+  display: grid;
+  padding: 20px 0;
+  align-items: center;
+  grid-template-columns: 4fr 1fr;
+  
+}
+.lastWeekListLI h4 {
+  margin-left: 10px;
+  font-weight: 600;
+}
+.lastWeekListLI p {
+  /* background: red; */
+  text-align: center;
+  margin-right: 10px;
+}
+
+
 
 
 

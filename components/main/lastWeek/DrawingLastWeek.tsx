@@ -1,19 +1,9 @@
 import React from "react";
-import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
 import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
-import DoubleArrowRoundedIcon from "@mui/icons-material/DoubleArrowRounded";
-import BatteryCharging20Icon from "@mui/icons-material/BatteryCharging20";
-import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull";
 
 interface myHabitListType {
   habitId?: number;
@@ -85,14 +75,14 @@ const DrawingLastWeek = ({
     <div className="lastWeek">
       <h2>저번주 달성률</h2>
       <List
-        className="lastWeelList"
+        className="lastWeekList"
         sx={{ width: "100%", bgcolor: "background.paper" }}
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
         <ListItemButton onClick={handleClick}>
-          <ListItemText
-            primary={(myLastWeekList.length / myHabitList.length) * 100 + "%"}
+          <ListItemText className="lastWeekSubTitle"
+            primary={(myLastWeekList.length / myHabitList.length) * 100 + "%" + " 달성하셨어요!"}
           />
           {/* 퍼센트를 보여줄 공간 */}
           {open ? <ExpandLess /> : "자세히보기"}
@@ -100,8 +90,13 @@ const DrawingLastWeek = ({
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <div>
-            <div>
+            <div className="drawingLastWeekSlide">
               <h3>저번주에 해야했던 습관</h3>
+              <div className="lastWeekTableHeader">
+                <h4>제목</h4>
+                <p>달성유무</p>
+              </div>
+              <div className="lastWeekUL">
               {myHabitList.map((list, i) => {
                 let weekListChecker = false;
                 myLastWeekList.map(nodes=> {
@@ -111,17 +106,18 @@ const DrawingLastWeek = ({
                   
                 })
                 return (
-                  <div key={i}>
+                  <div className="lastWeekListLI" key={i}>
                     <h4>{list.habitTitle}</h4>
                     {weekListChecker ? (
-                      <p>했구나!</p>
+                      <p>하셨군요!!</p>
                     ):(
-                      <p>안했구나</p>
+                      <p>다음엔 꼭!!</p>
                     )}
                    
                   </div>
                 );
               })}{/* map끝 */}
+              </div>
             </div>
           </div>
         </Collapse>
