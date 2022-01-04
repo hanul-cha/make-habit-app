@@ -1,33 +1,70 @@
 import React, { useEffect, useState } from "react";
 import { TextField, Button, Alert, AlertTitle } from "@mui/material";
-import JoinDB from "./JoinDB";
+import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const JoinMain = () => {
   const [joinId, joinSetId] = useState("");
   const [joinName, joinSetName] = useState("");
   const [joinPsword, joinSetpsword] = useState("");
   const [joinPswordCheck, joinSetpswordCheck] = useState("");
-  const [runJoin, setRunJoin] = useState(false);
   const [JoinFailAlert, setJoinFailAlert] = useState(false);
   const [dontUseThisId, setdontUseThisId] = useState(false);
 
+  const SET_USER = gql`
+    mutation MyMutation($userId: String!, $name: String!, $password: String!) {
+      createUser(
+        input: { user: { userId: $userId, name: $name, password: $password } }
+      ) {
+        clientMutationId
+      }
+    }
+  `;
+
+  const [setUser, { data }] = useMutation(SET_USER, {
+    onError: (error) => {
+      console.log(error);
+      setdontUseThisId(true);
+    },
+  });
+
   const joinBtn = () => {
-    setRunJoin(true);
+    if (
+      joinId !== "" &&
+      joinName !== "" &&
+      joinPsword !== "" &&
+      joinPswordCheck !== "" &&
+      joinPsword == joinPswordCheck
+    ) {
+      setUser({
+        variables: {
+          userId: joinId,
+          name: joinName,
+          password: joinPsword,
+        },
+      });
+    } else {
+      setJoinFailAlert(true);
+    }
   };
 
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    }
+  })
 
   useEffect(() => {
     setTimeout(() => {
       setJoinFailAlert(false);
     }, 5000);
-  },[JoinFailAlert])//JoinFailAlert의 상태가 변할때마다 실행함
+  }, [JoinFailAlert]); //JoinFailAlert의 상태가 변할때마다 실행함
 
   useEffect(() => {
     setTimeout(() => {
       setdontUseThisId(false);
     }, 5000);
-  },[dontUseThisId])
-  
+  }, [dontUseThisId]);
 
   return (
     <>
@@ -56,7 +93,7 @@ const JoinMain = () => {
           name="id"
           onChange={(e) => joinSetId(e.target.value)}
         />
-        
+
         <TextField
           className="joinTextField"
           id="outlined-basic"
@@ -93,15 +130,6 @@ const JoinMain = () => {
           join
         </Button>
       </div>
-      {runJoin && <JoinDB
-        joinId={joinId}
-        joinName={joinName}
-        joinPsword={joinPsword}
-        joinPswordCheck={joinPswordCheck}
-        setRunJoin={setRunJoin}
-        setJoinFailAlert={setJoinFailAlert}
-        setdontUseThisId={setdontUseThisId}
-      />}
     </>
   );
 };
