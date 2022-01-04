@@ -9,6 +9,7 @@ const JoinMain = () => {
   const [joinPswordCheck, joinSetpswordCheck] = useState("");
   const [runJoin, setRunJoin] = useState(false);
   const [JoinFailAlert, setJoinFailAlert] = useState(false);
+  const [dontUseThisId, setdontUseThisId] = useState(false);
 
   const joinBtn = () => {
     setRunJoin(true);
@@ -20,6 +21,12 @@ const JoinMain = () => {
       setJoinFailAlert(false);
     }, 5000);
   },[JoinFailAlert])//JoinFailAlert의 상태가 변할때마다 실행함
+
+  useEffect(() => {
+    setTimeout(() => {
+      setdontUseThisId(false);
+    }, 5000);
+  },[dontUseThisId])
   
 
   return (
@@ -28,6 +35,12 @@ const JoinMain = () => {
         <Alert severity="error">
           <AlertTitle>회원가입 실패</AlertTitle>
           <strong>작성 안한 칸이 있거나 확인비밀번호가 맞지 않습니다.</strong>
+        </Alert>
+      )}
+      {dontUseThisId && (
+        <Alert severity="error">
+          <AlertTitle>회원가입 실패</AlertTitle>
+          <strong>이미 사용중인 아이디 입니다.</strong>
         </Alert>
       )}
 
@@ -87,6 +100,7 @@ const JoinMain = () => {
         joinPswordCheck={joinPswordCheck}
         setRunJoin={setRunJoin}
         setJoinFailAlert={setJoinFailAlert}
+        setdontUseThisId={setdontUseThisId}
       />}
     </>
   );

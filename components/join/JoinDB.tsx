@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 
 interface JoinDBTypeProps {
   joinId: string;
@@ -8,6 +9,7 @@ interface JoinDBTypeProps {
   joinPswordCheck: string;
   setRunJoin: (a: boolean) => void;
   setJoinFailAlert: (a: boolean) => void;
+  setdontUseThisId: (a :boolean) => void;
 }
 
 const JoinDB = ({
@@ -17,8 +19,11 @@ const JoinDB = ({
   joinPswordCheck,
   setRunJoin,
   setJoinFailAlert,
+  setdontUseThisId,
 }: JoinDBTypeProps) => {
   console.log("on");
+
+  const router = useRouter();
 
   const SET_USER = gql`
     mutation MyMutation($userId: String!, $name: String!, $password: String!) {
@@ -30,11 +35,14 @@ const JoinDB = ({
     }
   `;
 
-  const [setUser, {data}] = useMutation(SET_USER, {
+  const [setUser, {data, loading}] = useMutation(SET_USER, {
     onError: (error) => {
       console.log(error)
+      setdontUseThisId(true)
     }
   })
+
+  console.log(loading, data)
 
   useEffect(() => {
     if (
@@ -44,7 +52,6 @@ const JoinDB = ({
       joinPswordCheck !== "" &&
       joinPsword == joinPswordCheck
     ) {
-      console.log(joinName, joinId, joinPsword, joinPswordCheck)
       setUser({
         variables: {
           userId: joinId,
@@ -52,7 +59,14 @@ const JoinDB = ({
           password: joinPsword
         }
       })
-      setRunJoin(false)
+      if(loading && data){
+        console.log("yes")
+        setRunJoin(false)
+      } else if(loading) {
+        setRunJoin(false)
+      }
+      console.log(data)
+      
     } else {
       setJoinFailAlert(true)
       setRunJoin(false)
