@@ -14,16 +14,20 @@ const JoinMain = () => {
     setRunJoin(true);
   };
 
-  setTimeout(() => {
-    setJoinFailAlert(false);
-  }, 3000);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setJoinFailAlert(false);
+    }, 5000);
+  },[JoinFailAlert])//JoinFailAlert의 상태가 변할때마다 실행함
+  
 
   return (
     <>
       {JoinFailAlert && (
         <Alert severity="error">
           <AlertTitle>회원가입 실패</AlertTitle>
-          <strong>확인 비밀번호가 일치하지않습니다</strong>
+          <strong>작성 안한 칸이 있거나 확인비밀번호가 맞지 않습니다.</strong>
         </Alert>
       )}
 
