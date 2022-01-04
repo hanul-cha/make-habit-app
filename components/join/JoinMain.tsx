@@ -8,8 +8,8 @@ const JoinMain = () => {
   const [joinName, joinSetName] = useState("");
   const [joinPsword, joinSetpsword] = useState("");
   const [joinPswordCheck, joinSetpswordCheck] = useState("");
-  const [JoinFailAlert, setJoinFailAlert] = useState(false);
-  const [dontUseThisId, setdontUseThisId] = useState(false);
+  const [JoinFailAlert, setJoinFailAlert] = useState(false);//공백 또는 확인 비번이 틀렸을때 알럿
+  const [dontUseThisId, setdontUseThisId] = useState(false);//중복되는 아이디가 있을때 알럿
 
   const router = useRouter();
 
@@ -22,13 +22,16 @@ const JoinMain = () => {
       }
     }
   `;
+  //뮤테이션 로직, 반환값은 임의의 값을 할당함 = 아무값이나 전달이 되면 오류없이 뮤테이트 되었다는 뜻이기 때문
 
   const [setUser, { data }] = useMutation(SET_USER, {
     onError: (error) => {
       console.log(error);
       setdontUseThisId(true);
+      //아래 조건문이 다맞았는데도 오류가 나온다면 중복PK밖에 없기 때문에 중복아이디 경고창을 띄워준다
     },
   });
+  //setUser함수를 호출하면 뮤테이션을 실행함
 
   const joinBtn = () => {
     if (
@@ -55,6 +58,7 @@ const JoinMain = () => {
       router.push("/login")
     }
   })
+  //뮤테이션 로딩이끝나고 데이터베이스에 반영이 되면 data로 쿼리에서 지정한 값을 가져온다
 
   useEffect(() => {
     setTimeout(() => {
@@ -66,7 +70,7 @@ const JoinMain = () => {
     setTimeout(() => {
       setdontUseThisId(false);
     }, 5000);
-  }, [dontUseThisId]);
+  }, [dontUseThisId]); //dontUseThisId 상태가 변할때마다 실행함
 
   return (
     <>

@@ -98,6 +98,7 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
       if (!loading) {
         console.log("저장된 체크리스트가 없습니다");
         //알럿을 올려두고 오케이하면 뮤테이션 실행후 체크 추가
+        //여기 뮤테이션은 habitcheck뮤테이션이 들어와야한다
         setHabitCheck(true);
       }
     } else {

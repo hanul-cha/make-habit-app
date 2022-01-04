@@ -65,7 +65,7 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
           <Button className="login_btn" variant="outlined">
             추가하기!!
           </Button>
-          {/* 여기에 뮤테이트 추가 해야함 */}
+          {/* 여기에 뮤테이트 링크 추가 해야함 */}
         </div>
       )}
     </>
