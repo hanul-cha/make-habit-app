@@ -21,7 +21,7 @@ const JoinDB = ({
   console.log("on");
 
   const SET_USER = gql`
-    mutation MyMutation($userId: string!, $name: string!, $password: string!) {
+    mutation MyMutation($userId: String!, $name: String!, $password: String!) {
       createUser(
         input: { user: { userId: $userId, name: $name, password: $password } }
       ) {
@@ -32,7 +32,7 @@ const JoinDB = ({
 
   const [setUser, {data}] = useMutation(SET_USER, {
     onError: (error) => {
-      console.log("이미 존재하는 아이디 입니다.")
+      console.log(error)
     }
   })
 
