@@ -11,6 +11,8 @@ const JoinMain = () => {
   const [JoinFailAlert, setJoinFailAlert] = useState(false);
   const [dontUseThisId, setdontUseThisId] = useState(false);
 
+  const router = useRouter();
+
   const SET_USER = gql`
     mutation MyMutation($userId: String!, $name: String!, $password: String!) {
       createUser(
@@ -50,7 +52,7 @@ const JoinMain = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
+      router.push("/login")
     }
   })
 

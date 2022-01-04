@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 
-const UseGraphql = (id: string) => {
+const UseJoinMutation = (id: string) => {
   const GET_USER_INFO = gql`
     query MyQuery($userId: String!) {
       userByUserId(userId: $userId) {
@@ -24,6 +24,6 @@ const UseGraphql = (id: string) => {
   };
 };
 
-export default UseGraphql;
+export default UseJoinMutation;
 
 //뮤테이션을 관리하는 커스텀 훅

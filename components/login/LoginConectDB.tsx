@@ -20,7 +20,7 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
 
   const { loading, data } = UseGraphql(id)
   //graphql 쿼리가 있는 커스텀훅
-
+  
   useEffect(() => {
     if (!loading) {
       if (data.userByUserId === null) {
