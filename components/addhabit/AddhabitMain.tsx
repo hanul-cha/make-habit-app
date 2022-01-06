@@ -13,6 +13,7 @@ const GET_WEEK_HABIT = gql`
         nodes {
           habitId
           habitWeek
+          habitTitle
         }
       }
       name

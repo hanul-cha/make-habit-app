@@ -342,9 +342,10 @@ a{
 
 
 .mutationHabitWrapper {
-  background: rgb(177, 189, 252);
+  background: rgb(177, 222, 252);
   padding: 10px;
   margin: 0 10px;
+  margin-bottom: 30px;
   border-radius: 10px;
 }
 
@@ -358,6 +359,14 @@ a{
   margin: 0 8px;
   display: grid;
   grid-template-rows: 70px 70px 70px 40px;
+}
+
+.HobbiesByDay {
+  background: rgb(252, 226, 177);
+  padding: 10px;
+  margin: 0 10px;
+  margin-bottom: 30px;
+  border-radius: 10px;
 }
 
 

@@ -13,14 +13,27 @@ interface MutationFieldType {
 }
 
 const SET_HABIT = gql`
-    mutation MyMutation($userId: String!, $habitTitle: String!, $habitText: String!, $habitWeek: Int!) {
-        createMyhabit(
-        input: { myhabit: { userId: $userId, habitTitle: $habitTitle, habitText: $habitText, habitWeek:$habitWeek } }
-      ) {
-        clientMutationId
+  mutation MyMutation(
+    $userId: String!
+    $habitTitle: String!
+    $habitText: String!
+    $habitWeek: Int!
+  ) {
+    createMyhabit(
+      input: {
+        myhabit: {
+          userId: $userId
+          habitTitle: $habitTitle
+          habitText: $habitText
+          habitWeek: $habitWeek
+        }
       }
+    ) {
+      clientMutationId
     }
-  `;
+  }
+`;
+//새로운 취미를 추가하는 뮤테이션 쿼리
 
 const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
   const [habitTitle, sethabitTitle] = useState<String>("");
@@ -39,14 +52,13 @@ const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
 
   const runMutationHabitBtn = () => {
     if (habitTitle !== "" && habitText !== "" && age !== "") {
-        
       console.log(userName, habitTitle, habitText, Number(age));
       setHabit({
         variables: {
           userId: userName,
           habitTitle: habitTitle,
           habitText: habitText,
-          habitWeek: Number(age)
+          habitWeek: Number(age),
         },
       });
     } else {
