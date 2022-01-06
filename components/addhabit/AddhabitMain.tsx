@@ -3,6 +3,7 @@ import axios from "axios";
 import PleaseLogin from "../main/PleaseLogin";
 import { useQuery, gql } from "@apollo/client";
 import HobbiesByDay from "./HobbiesByDay";
+import MutationHabit from "./MutationHabit";
 
 const GET_WEEK_HABIT = gql`
   query MyQuery($userInfo: String!) {
@@ -35,16 +36,19 @@ const AddhabitMain = () => {
     },
   });
 
-  console.log(data?.userByUserId?.name);
-
-  return <>
-  {userInfo !== undefined ? 
-  <div>
-      <h2>{data?.userByUserId?.name}님의 취미</h2>
-      <HobbiesByDay />
-  </div> 
-  : 
-  <PleaseLogin />}</>;
+  return (
+    <>
+      {userInfo !== undefined ? (
+        <div className="addHabit">
+          <h2><span>{data?.userByUserId?.name}</span>님의 취미</h2>
+          <MutationHabit userName={userInfo} />
+          <HobbiesByDay node={data?.userByUserId?.myhabitsByUserId?.nodes} />
+        </div>
+      ) : (
+        <PleaseLogin />
+      )}
+    </>
+  );
 };
 
 export default AddhabitMain;

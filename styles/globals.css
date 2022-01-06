@@ -330,6 +330,30 @@ a{
 }
 
 
+/* mutationHabit */
+.addHabit>h2 {
+  margin: 30px 10px;
+}
+
+.addHabit>h2>span {
+  font-size: 20px;
+  color: coral;
+}
+
+
+.mutationHabitWrapper {
+  background: rgb(177, 189, 252);
+  padding: 10px;
+  margin: 0 10px;
+  border-radius: 10px;
+}
+
+
+.mutationHabitTitle span {
+  font-weight: 600;
+  font-size: 20px;
+}
+
 
 
 
