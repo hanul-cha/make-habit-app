@@ -3,7 +3,7 @@ import axios from "axios";
 import PleaseLogin from "../main/PleaseLogin";
 import { useQuery, gql } from "@apollo/client";
 import HobbiesByDay from "./HobbiesByDay";
-import MutationHabit from "./MutationHabit";
+import MutationHabit from "./mutationHabit/MutationHabit";
 
 const GET_WEEK_HABIT = gql`
   query MyQuery($userInfo: String!) {

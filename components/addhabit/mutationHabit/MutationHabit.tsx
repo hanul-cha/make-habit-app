@@ -5,14 +5,13 @@ import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
-import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
+import MutationField from "./MutationField";
 
 interface MutationHabit {
   userName: string;
 }
 
-const MutationHabit = ({}: MutationHabit) => {
+const MutationHabit = ({userName}: MutationHabit) => {
   const [open, setOpen] = React.useState(false); //클릭여부를 저장하는 state
 
   const handleClick = () => {
@@ -37,7 +36,7 @@ const MutationHabit = ({}: MutationHabit) => {
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <div className="addHabitFormField">
-            
+            <MutationField userName={userName} />
           </div>
         </Collapse>
       </List>
