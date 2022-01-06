@@ -4,6 +4,7 @@ import PleaseLogin from "../main/PleaseLogin";
 import { useQuery, gql } from "@apollo/client";
 import HobbiesByDay from "./HobbiesByDay";
 import MutationHabit from "./mutationHabit/MutationHabit";
+import { Alert, AlertTitle } from "@mui/material";
 
 const GET_WEEK_HABIT = gql`
   query MyQuery($userInfo: String!) {
@@ -21,6 +22,13 @@ const GET_WEEK_HABIT = gql`
 
 const AddhabitMain = () => {
   const [userInfo, setUserInfo] = useState();
+  const [failAlert, setFailAlert] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+        setFailAlert(false);
+    }, 5000);
+  }, [failAlert]); //failAlert 상태가 변할때마다 실행함
 
   useEffect(() => {
     axios.get("/api/isLogin").then((res) => {
@@ -38,10 +46,17 @@ const AddhabitMain = () => {
 
   return (
     <>
+    {failAlert && (
+        <Alert severity="error">
+          <AlertTitle>추가 실패</AlertTitle>
+          <strong>빈칸이 있는지 확인해 주세요!!</strong>
+        </Alert>
+      )}
+
       {userInfo !== undefined ? (
         <div className="addHabit">
           <h2><span>{data?.userByUserId?.name}</span>님의 취미</h2>
-          <MutationHabit userName={userInfo} />
+          <MutationHabit userName={userInfo} setFailAlert={setFailAlert} />
           <HobbiesByDay node={data?.userByUserId?.myhabitsByUserId?.nodes} />
         </div>
       ) : (

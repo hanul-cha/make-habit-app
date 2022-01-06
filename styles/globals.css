@@ -356,6 +356,8 @@ a{
 
 .MutationField {
   margin: 0 8px;
+  display: grid;
+  grid-template-rows: 70px 70px 70px 40px;
 }
 
 

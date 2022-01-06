@@ -9,9 +9,10 @@ import MutationField from "./MutationField";
 
 interface MutationHabit {
   userName: string;
+  setFailAlert: (a:boolean)=> void
 }
 
-const MutationHabit = ({userName}: MutationHabit) => {
+const MutationHabit = ({userName, setFailAlert}: MutationHabit) => {
   const [open, setOpen] = React.useState(false); //클릭여부를 저장하는 state
 
   const handleClick = () => {
@@ -30,13 +31,12 @@ const MutationHabit = ({userName}: MutationHabit) => {
             className="mutationHabitTitle"
             primary="추가하기!!"
           />
-          {/* 퍼센트를 보여줄 공간 */}
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <div className="addHabitFormField">
-            <MutationField userName={userName} />
+            <MutationField userName={userName} setFailAlert={setFailAlert} />
           </div>
         </Collapse>
       </List>

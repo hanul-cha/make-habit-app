@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
 import UseGraphql from "../customhooks/UseGraphql";

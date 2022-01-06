@@ -1,30 +1,57 @@
 import React, { useState } from "react";
-import { TextField, Button, Alert, AlertTitle } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { gql, useMutation } from "@apollo/client";
 
 interface MutationFieldType {
-  userName: string;
+  userName: String;
+  setFailAlert: (a: boolean) => void;
 }
 
-const MutationField = ({ userName }: MutationFieldType) => {
-  const [habitTitle, sethabitTitle] = useState("");
-  const [habitText, sethabitText] = useState("");
-  const [habitWeek, sethabitWeek] = useState<number>();
-  const [age, setAge] = useState("");
+const SET_HABIT = gql`
+    mutation MyMutation($userId: String!, $habitTitle: String!, $habitText: String!, $habitWeek: Int!) {
+        createMyhabit(
+        input: { myhabit: { userId: $userId, habitTitle: $habitTitle, habitText: $habitText, habitWeek:$habitWeek } }
+      ) {
+        clientMutationId
+      }
+    }
+  `;
 
-  
+const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
+  const [habitTitle, sethabitTitle] = useState<String>("");
+  const [habitText, sethabitText] = useState<String>("");
+  const [age, setAge] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
-    sethabitWeek(Number(age))
   };
 
+  const [setHabit, { data, loading }] = useMutation(SET_HABIT, {
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
   const runMutationHabitBtn = () => {
-    console.log(habitTitle, habitText, habitWeek)
+    if (habitTitle !== "" && habitText !== "" && age !== "") {
+        
+      console.log(userName, habitTitle, habitText, Number(age));
+      setHabit({
+        variables: {
+          userId: userName,
+          habitTitle: habitTitle,
+          habitText: habitText,
+          habitWeek: Number(age)
+        },
+      });
+    } else {
+      setFailAlert(true);
+    }
   };
   return (
     <div className="MutationField">
@@ -50,28 +77,29 @@ const MutationField = ({ userName }: MutationFieldType) => {
       </Box>
 
       <TextField
-        className="joinTextField"
+        className="addHabitTextField"
         id="outlined-basic"
-        label="id"
+        label="TITLE"
         variant="outlined"
-        placeholder="user id"
-        name="id"
+        placeholder="title"
+        name="title"
         onChange={(e) => sethabitTitle(e.target.value)}
       />
 
       <TextField
-        className="joinTextField"
+        className="addHabitTextField"
         id="outlined-basic"
-        label="name"
+        label="TEXT"
         variant="outlined"
-        placeholder="user name"
-        name="name"
+        placeholder="text"
+        name="text"
         onChange={(e) => sethabitText(e.target.value)}
       />
 
       <Button
-        className="join_btn"
+        className="addHabit_btn"
         variant="outlined"
+        fullWidth
         onClick={runMutationHabitBtn}
       >
         추가하기
