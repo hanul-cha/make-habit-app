@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import DrawingHabit from "./DrawingHabit";
 import { Button } from "@mui/material";
+import Link from "next/link";
 
 interface TodayHabitTypeProps {
   userId: string | undefined;
@@ -63,7 +64,9 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
         <div className="noHabit">
           <h2>오늘의 활동이 없습니다</h2>
           <Button className="login_btn" variant="outlined">
-            추가하기!!
+          <Link href="/addHabit">
+                  <a>추가하기</a>
+                </Link>
           </Button>
           {/* 여기에 뮤테이트 링크 추가 해야함 */}
         </div>

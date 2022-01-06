@@ -65,9 +65,6 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
     console.log(e)
   }; //클릭하면 밑으로 리스트를 보여줄것임
 
-  const test = (e:any) => {
-    console.log(e)
-  }
   return (
     <div className="HobbiesByDay">
       <h2>요일별 취미</h2>
@@ -84,7 +81,7 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
                 {/* 취미제목 */}
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit onClick={e => test(e)}>
+              <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   <ListItemButton sx={{ pl: 4 }}>
                     <ListItemText primary="내용" />

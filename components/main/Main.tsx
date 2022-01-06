@@ -73,11 +73,11 @@ const Main = ({
       }
     });
   }; //쿠키 삭제
-  /* console.log(loginUser); */
+  console.log(userInfo);
 
   return (
     <>
-      {userInfo !== null /* 받은값이 있다면 밑에 컴포넌트를 실행 */ ? (
+      {userInfo !== undefined && userInfo !== null /* 받은값이 있다면 밑에 컴포넌트를 실행 */ ? (
         <div className="main_successLogin">
           <div className="holloUser">
             <h1>

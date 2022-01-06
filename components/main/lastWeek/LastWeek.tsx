@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { Button } from "@mui/material";
 import DrawingLastWeek from "./DrawingLastWeek";
+import Link from "next/link";
 
 interface LastWeekTypeProps {
   userId: string | undefined;
 }
 
 const LastWeek = ({ userId }: LastWeekTypeProps) => {
-
   const GET_WEEK_HABIT = gql`
     query MyQuery($userId: String!) {
       userByUserId(userId: $userId) {
@@ -66,14 +66,18 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
           {weekLoad.data.userByUserId.myhabitsByUserId.nodes.length !== 0 ? (
             <DrawingLastWeek
               myHabitList={weekLoad.data.userByUserId.myhabitsByUserId.nodes}
-              habitCheckList={checkLoad.data.userByUserId.habitchecksByUserId.nodes}
+              habitCheckList={
+                checkLoad.data.userByUserId.habitchecksByUserId.nodes
+              }
             />
           ) : (
             <div className="noLastWeekHabit">
               <h2>저번주에 해야할 습관이 없습니다.</h2>
               <p>혹시 아직 일정 추가를 안하셨나요?</p>
               <Button className="lastWeek_btn" variant="outlined">
-                추가하기!!
+                <Link href="/addHabit">
+                  <a>추가하기</a>
+                </Link>
               </Button>
               {/* 여기에 뮤테이트 추가 해야함 여기에서 사용할 뮤테이션은 커스텀훅으로 만드는게 좋아보임 */}
             </div>

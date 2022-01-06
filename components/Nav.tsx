@@ -8,11 +8,25 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const Nav = () => {
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
+
+  const router = useRouter()
+
+  const removeCookie = (event: Event | React.SyntheticEvent) => {
+    handleClose(event)
+    axios.get("/api/logout").then((res) => {
+      if (res.status === 200) {
+        console.log("쿠키삭제 완료");
+        router.push("/login");
+      }
+    });
+  }; //쿠키 삭제
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -93,6 +107,11 @@ const Nav = () => {
                     <MenuItem onClick={handleClose}>
                       <Link href="/join">
                         <a>join</a>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <Link href="/addHabit">
+                        <a>my habit</a>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose}>Logout</MenuItem>
