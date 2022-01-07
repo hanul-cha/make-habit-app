@@ -61,8 +61,10 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
   console.log(hobbiesByDayList);
 
   const handleClick = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      setOpen(!open)
-    console.log(e)
+      
+    console.log(e.currentTarget.nextSibling)//일단은 이게 다음 컨텐츠를 선택하는 방법임 이걸로
+                                            //내용이 들어있는 부분의 css(block을쓰든 hidden을쓰든)를 직접 컨트롤 해보쟈...
+    setOpen(!open)
   }; //클릭하면 밑으로 리스트를 보여줄것임
 
   /* 
@@ -80,6 +82,7 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
       >
         <>
           {hobbiesByDayList.map((day, i) => {
+            console.log(day)
             return <div key={i}>
               <ListItemButton onClick={e => handleClick(e)}>
                 <ListItemText className="" primary={day.day} />
