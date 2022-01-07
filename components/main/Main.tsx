@@ -73,7 +73,7 @@ const Main = ({
       }
     });
   }; //쿠키 삭제
-  console.log(userInfo);
+  /* console.log(userInfo); */
 
   return (
     <>

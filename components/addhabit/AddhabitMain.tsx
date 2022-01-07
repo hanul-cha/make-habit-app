@@ -39,6 +39,13 @@ const AddhabitMain = () => {
     });
   });
 
+  useEffect(() => {
+    return () => {
+      setFailAlert(false)
+    };
+  }, []);
+  
+
   const { data, loading } = useQuery(GET_WEEK_HABIT, {
     variables: {
       userInfo,
