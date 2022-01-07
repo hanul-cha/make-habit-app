@@ -51,7 +51,7 @@ const Main = ({
   const { loading, data } = UseGraphql(loginUser);
   //아폴로 useQuery 통신방식입니다 loading이 false가 되면 data에 값이 들어옵니다.
   /*
-  어떤값이 들어오는진 콘솔을 확인해주세요 
+  어떤값이 들어오는지는 콘솔을 확인해주세요 
   console.log(loading, data) 
   */
 

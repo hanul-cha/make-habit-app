@@ -65,6 +65,11 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
     console.log(e)
   }; //클릭하면 밑으로 리스트를 보여줄것임
 
+  /* 
+  habitList의 list길이를 사용하면 요일별 취미개수를 얻을수 있다 
+  현재 문제는 위에 헨들클릭함수가 map으로 생성된 모든 하위태그에서 작동하기때문에 내가 직접 만들어야 할듯함...
+  */
+
   return (
     <div className="HobbiesByDay">
       <h2>요일별 취미</h2>

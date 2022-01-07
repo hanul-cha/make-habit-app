@@ -114,7 +114,7 @@ const Nav = () => {
                         <a>my habit</a>
                       </Link>
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={removeCookie}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

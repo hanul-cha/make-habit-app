@@ -43,13 +43,6 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
     }
   });
 
-  /* console.log(myhabit); */
-  /* if (myhabit) {
-    console.log(myhabit[0]);
-  } */
-
-  //myhabit 의 길이를 알고 싶으면 type지정를 좀 더 해야될거갗은데?
-
   return (
     <>
       {myhabit && myhabit?.length !== 0 ? (

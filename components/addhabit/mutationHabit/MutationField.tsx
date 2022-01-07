@@ -38,11 +38,13 @@ const SET_HABIT = gql`
 const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
   const [habitTitle, sethabitTitle] = useState<String>("");
   const [habitText, sethabitText] = useState<String>("");
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState("");//요일 선택하면 담길 요일별인덱스번호
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
-  };
+  };//habit 테이블 week속성을 INT로 받기로 되있어서 처음부터 number로 받으면 좋지만..
+    //해당 ui컴포넌트는 string만을 받게 타입지정이 되어 있는듯하다 타입을 바꾸고 싶으면 
+    //커스텀 컴포넌트api를 사용해야 될듯하다.
 
   const [setHabit, { data, loading }] = useMutation(SET_HABIT, {
     onError: (error) => {
@@ -51,7 +53,7 @@ const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
   });
 
   const runMutationHabitBtn = () => {
-    if (habitTitle !== "" && habitText !== "" && age !== "") {
+    if (habitTitle !== "" && habitText !== "" && age !== "") {//작성한게 있다면
       console.log(userName, habitTitle, habitText, Number(age));
       setHabit({
         variables: {
@@ -62,7 +64,7 @@ const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
         },
       });
     } else {
-      setFailAlert(true);
+      setFailAlert(true);//위 조건을 만족못하면 알람을 켜줄것임
     }
   };
   return (
