@@ -369,6 +369,13 @@ a{
   border-radius: 10px;
 }
 
+.habbieByDayCustomList {
+  height: 0;
+  overflow: hidden;
+  /* transition: all initial 2s; */
+  background: pink;
+}
+
 
 
 

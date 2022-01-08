@@ -60,11 +60,14 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
   ]; //요일별로 들어온 요일인덱스와 runfilter함수에서 리턴한 조건에 맞는 리스트가 들어있음
   console.log(hobbiesByDayList);
 
-  const handleClick = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      
-    console.log(e.currentTarget.nextSibling)//일단은 이게 다음 컨텐츠를 선택하는 방법임 이걸로
-                                            //내용이 들어있는 부분의 css(block을쓰든 hidden을쓰든)를 직접 컨트롤 해보쟈...
-    setOpen(!open)
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const trueHeight = e.currentTarget.nextElementSibling?.firstElementChild?.clientHeight
+    e.currentTarget.nextElementSibling?.animate([{ height: `${trueHeight}px` }], {
+      duration: 50,
+      fill: "forwards",
+    });
+    //animate속성에 픽셀을 지정할땐 특정한 값을 입력해줘야한다. auto안됨 그래서 inner컨테이너를 만들어 높이를 변수에
+    //저장하고 그 높이로 
   }; //클릭하면 밑으로 리스트를 보여줄것임
 
   /* 
@@ -82,22 +85,21 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
       >
         <>
           {hobbiesByDayList.map((day, i) => {
-            console.log(day)
-            return <div key={i}>
-              <ListItemButton onClick={e => handleClick(e)}>
-                <ListItemText className="" primary={day.day} />
-                {/* 취미제목 */}
-                {open ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemText primary="내용" />
-                    {/* 텍스트부분 */}
-                  </ListItemButton>
-                </List>
-              </Collapse>
-            </div>;
+            console.log(day);
+            return (
+              <div key={i}>
+                <ListItemButton onClick={(e) => handleClick(e)}>
+                  <ListItemText className="" primary={day.day} />
+                  {/* 취미제목 */}
+                  {open ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <div className="habbieByDayCustomList">
+                  <div className="customListInner">
+                    <h3>내용</h3>
+                  </div>
+                </div>
+              </div>
+            );
           })}
         </>
       </List>
