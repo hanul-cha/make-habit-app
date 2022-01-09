@@ -78,12 +78,7 @@ const JoinMain = () => {
       setdontUseThisId(false);
     };
   }, []);//클린업함수
-  /* 
-  Can't perform a React state update on an unmounted component오류  
-  해당오류에대해 비동기처리(서버패칭)에 대한 문제로 인한건지 알았지만   
-  setTime함수가 실행되면서 state를 바꾸려는 시도때문에 생긴 일같음  
-  결국 이것도 비동기처리 문제이긴한데 결론으론 클린업함수로 해결해 주었음
-  */
+  
 
   return (
     <>

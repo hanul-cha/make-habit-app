@@ -53,8 +53,7 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
   /* console.log(hobbiesByDayList); */
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const trueHeight =
-      e.currentTarget.nextElementSibling?.firstElementChild?.clientHeight;
+    const trueHeight = e.currentTarget.nextElementSibling?.firstElementChild?.clientHeight;
     if (e.currentTarget.nextElementSibling?.clientHeight == 0) {
       //졉혀있다면
       e.currentTarget.nextElementSibling?.animate(
@@ -84,9 +83,9 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
             console.log(day.list);
             return (
               <div className="HobbiesByDayList" key={i}>
-                <div onClick={(e) => handleClick(e)}>
+                <div className="clickArea" onClick={(e) => handleClick(e)}>
                   <h2>{day.day}</h2>
-                  <h3>취미 개수 : {day.list?.length}</h3>
+                  <h3>취미 개수 : {day.list?.length}개</h3>
                 </div>
                 <div className="habbieByDayCustomList">
                   <div className="customListInner">

@@ -373,11 +373,35 @@ a{
   height: 0;
   overflow: hidden;
   /* transition: all initial 2s; */
-  background: pink;
+}
+
+.customListInner {
+  padding: 15px;
 }
 
 .HobbiesByDayMainCon {
   background: #fff;
+}
+
+.HobbiesByDay>h2 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.HobbiesByDayList h2 {
+  font-weight: 600;
+}
+
+.clickArea {
+  display: grid;
+  background: yellow;
+  padding: 15PX;
+  grid-template-columns: 1fr auto;
+}
+
+.haveHobbie, .tryAddBabit {
+  background: red;
 }
 
 
