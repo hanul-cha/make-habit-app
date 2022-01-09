@@ -56,6 +56,13 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
     const trueHeight = e.currentTarget.nextElementSibling?.firstElementChild?.clientHeight;
     if (e.currentTarget.nextElementSibling?.clientHeight == 0) {
       //졉혀있다면
+      e.currentTarget.animate(
+        [{ paddingBottom: "5px" }],
+        {
+          duration: 10,
+          fill: "forwards",
+        }
+      )
       e.currentTarget.nextElementSibling?.animate(
         [{ height: `${trueHeight}px` }],
         {
@@ -64,6 +71,13 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
         }
       );
     } else {
+      e.currentTarget.animate(
+        [{ paddingBottom: "15px" }],
+        {
+          duration: 10,
+          fill: "forwards",
+        }
+      )
       e.currentTarget.nextElementSibling?.animate([{ height: 0 }], {
         //펼처져 있다면
         duration: 50,
@@ -85,14 +99,14 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
               <div className="HobbiesByDayList" key={i}>
                 <div className="clickArea" onClick={(e) => handleClick(e)}>
                   <h2>{day.day}</h2>
-                  <h3>취미 개수 : {day.list?.length}개</h3>
+                  <h3>취미 개수 : <span className="clickAreaSpan">{day.list?.length}</span>개</h3>
                 </div>
                 <div className="habbieByDayCustomList">
                   <div className="customListInner">
                     {day.list?.length !== 0 ? (
                       <div className="haveHobbie">
                         {day.list?.map((hobbies, i) => {
-                          return <div key={i}>{hobbies.habitTitle}</div>;
+                          return <div className="haveHobbieList" key={i}>◼ {hobbies.habitTitle}</div>;
                         })}
                       </div>
                     ) : (

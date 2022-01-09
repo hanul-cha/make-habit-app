@@ -362,7 +362,7 @@ a{
 }
 
 .HobbiesByDay {
-  background: rgb(252, 226, 177);
+  background: rgb(217, 252, 177);
   padding: 10px;
   margin: 0 10px;
   margin-bottom: 30px;
@@ -377,10 +377,12 @@ a{
 
 .customListInner {
   padding: 15px;
+  padding-top: 0;
 }
 
 .HobbiesByDayMainCon {
   background: #fff;
+  padding: 10px;
 }
 
 .HobbiesByDay>h2 {
@@ -395,16 +397,26 @@ a{
 
 .clickArea {
   display: grid;
-  background: yellow;
+  /* background: yellow; */
   padding: 15PX;
   grid-template-columns: 1fr auto;
 }
 
-.haveHobbie, .tryAddBabit {
-  background: red;
+.clickAreaSpan{
+  color: rgb(20, 149, 255);
 }
 
+.haveHobbie, .tryAddBabit {
+  border: 3px solid rgb(204, 252, 236);
+  padding: 10px;
+}
 
+.haveHobbie>div {
+  margin-bottom: 10px;
+}
+.haveHobbie>div:last-child {
+  margin-bottom: 0;
+}
 
 
 /* nav */
