@@ -54,7 +54,7 @@ const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
 
   const runMutationHabitBtn = () => {
     if (habitTitle !== "" && habitText !== "" && age !== "") {//작성한게 있다면
-      console.log(userName, habitTitle, habitText, Number(age));
+      /* console.log(userName, habitTitle, habitText, Number(age)); */
       setHabit({
         variables: {
           userId: userName,

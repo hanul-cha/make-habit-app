@@ -49,7 +49,7 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
         <div className="todayHabit_main">
           <h2>매주해야될 오늘의 습관</h2>
           {myhabit.map((e, i) => {
-            return <DrawingHabit e={e} key={i} />;
+            return <DrawingHabit e={e} key={i} userId={userId} />;
           })}
           {/* 오늘할일 리스트를 그려줄 컴포넌트를 인자수만큼 실행 */}
         </div>

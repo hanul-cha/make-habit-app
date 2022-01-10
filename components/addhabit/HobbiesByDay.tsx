@@ -12,7 +12,7 @@ interface HobbiesByDayType {
 }
 
 const HobbiesByDay = ({ node }: HobbiesByDayType) => {
-  console.log(node);
+  /* console.log(node); */
 
   const runfilter = (day: number) => {
     if (node !== undefined) {
@@ -94,7 +94,6 @@ const HobbiesByDay = ({ node }: HobbiesByDayType) => {
       <div className="HobbiesByDayMainCon">
         <>
           {hobbiesByDayList.map((day, i) => {
-            console.log(day.list);
             return (
               <div className="HobbiesByDayList" key={i}>
                 <div className="clickArea" onClick={(e) => handleClick(e)}>

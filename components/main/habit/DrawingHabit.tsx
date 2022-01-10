@@ -14,6 +14,7 @@ interface DrawingHabitType {
     node?: any;
     __typename?: string;
   };
+  userId:string|undefined
 }
 
 interface DrawNodeType {
@@ -24,7 +25,7 @@ interface DrawNodeType {
   __typename?: string;
 }
 
-const DrawingHabit = ({ e }: DrawingHabitType) => {
+const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const [open, setOpen] = React.useState(false); //클릭여부를 저장하는 state
   const [habitCheck, setHabitCheck] = React.useState(false); //체크여부를 판단하는 state
 
@@ -49,7 +50,6 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
   //해당 컴포넌트에 들어온 myhabit데이터의 pk값을 대입해 habitcheck의 fk값과 대조해 데이터를 가져온다
 
   const habitId = e?.node?.habitId;
-  /* console.log(habitId); */
 
   const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {
@@ -87,13 +87,20 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
 
     if (habitCheck == false) {
       if (!loading) {
-        console.log("저장된 체크리스트가 없습니다");
+        const habitConfirm = confirm("정말 했나요??")
+        if(habitConfirm){
+          console.log(today,habitId,userId)
+          /* setHabitCheck(true); */
+        }
         //알럿을 올려두고 오케이하면 뮤테이션 실행후 체크 추가
         //여기 뮤테이션은 habitcheck뮤테이션이 들어와야한다
-        setHabitCheck(true);
+        
       }
     } else {
-      console.log(" 이미 체크 하셨습니다 체크 해제 하시겠습니까?");
+      const habitCheckConfirm = confirm("이미 체크하신 습관입니다. 해제 하시겠습니까?")
+      if(habitCheckConfirm){
+        setHabitCheck(false);
+      }
     }
   };
   /* 
@@ -101,7 +108,7 @@ const DrawingHabit = ({ e }: DrawingHabitType) => {
   graphql로딩이 끝나기만 기다렸다가(체크값 반영이 완료되면) 
   체크값만 보고 실행하면된다!
   */
-  /* console.log(e); */
+  console.log(e);
 
   return (
     <>
