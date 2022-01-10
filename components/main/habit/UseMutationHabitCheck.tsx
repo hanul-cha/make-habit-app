@@ -51,7 +51,7 @@ const UseMutationHabitCheck = ({
     return {
       runDeleteCheck,
       dataSet,
-      returnData:runDeleteCheckData.data
+      returnData:runDeleteCheckData
     };
   }
 

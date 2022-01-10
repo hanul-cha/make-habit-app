@@ -9,6 +9,7 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import UseMutationHabitCheck from "./UseMutationHabitCheck";
+import { useRouter } from "next/router";
 
 interface DrawingHabitType {
   e?: {
@@ -40,11 +41,7 @@ const GET_USER_INFO = gql`
 //해당 컴포넌트에 들어온 myhabit데이터의 pk값을 대입해 habitcheck의 fk값과 대조해 데이터를 가져온다
 
 const SET_HABITCHECK = gql`
-  mutation MyMutation(
-    $userId: String!
-    $habitId: Int!
-    $checkDate: Int!
-  ) {
+  mutation MyMutation($userId: String!, $habitId: Int!, $checkDate: Int!) {
     createHabitcheck(
       input: {
         habitcheck: {
@@ -63,13 +60,15 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const [open, setOpen] = React.useState(false); //클릭여부를 저장하는 state
   const [habitCheck, setHabitCheck] = React.useState(false); //체크여부를 판단하는 state
 
+  const route = useRouter();
+
   const date = new Date();
   const year = date.getFullYear();
   const month = ("0" + (1 + date.getMonth())).slice(-2);
   const day = ("0" + date.getDate()).slice(-2);
-  const today = 20220101 /* Number(year + month + day); */ //오늘날짜 현제는 테스트날자임
+  const today = 20220101; /* Number(year + month + day); */ //오늘날짜 현제는 테스트날자임
 
-  const habitId:number|undefined = e?.node?.habitId; //해당컴포넌트에서 사용할 취미의 아이디
+  const habitId: number | undefined = e?.node?.habitId; //해당컴포넌트에서 사용할 취미의 아이디
 
   const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {
@@ -104,13 +103,43 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const checkData = {
     habitId,
     today,
-    userId
-  }
+    userId,
+  };
 
-  const sendCheck = UseMutationHabitCheck(checkData)//쿼리, 뮤테이션이 있는 커스텀훅
-  const runDeleteCheck = sendCheck?.runDeleteCheck//뮤테이션의 액션함수
-  const runDeleteCheckDataSet = sendCheck?.dataSet
-  
+  const sendCheck = UseMutationHabitCheck(checkData); //쿼리, 뮤테이션이 있는 커스텀훅
+  const runDeleteCheck = sendCheck?.runDeleteCheck; //뮤테이션의 액션함수
+  const runDeleteCheckDataSet = sendCheck?.dataSet;
+  const runDeleteCheckReturnData = sendCheck?.returnData;
+
+  console.log(runHabitCheckData.loading)
+  console.log(sendCheck);
+
+  React.useEffect(() => {
+    if (runHabitCheckData.data !== undefined) {
+      if (runHabitCheckData.data?.createHabitcheck?.clientMutationId == null) {
+        console.log("체크성공이야!!!");
+        /* setHabitCheck(true); */
+        route.push("/");
+      }
+    } //createMutation성공시
+  }, [runHabitCheckData.data]);
+  React.useEffect(() => {
+    if (runDeleteCheckReturnData?.data !== undefined) {
+      if (
+        runDeleteCheckReturnData?.data?.deleteHabitcheckByCheckId
+          ?.clientMutationId == null
+      ) {
+        console.log("체크해제 성공이야!!");
+        /* route.push("/") */
+        /* setHabitCheck(false); */
+      }
+    } //deleteMutation성공시
+  }, [runDeleteCheckReturnData?.data]);
+  /* 
+    뮤테이션이 실패하면 오류만 반환하는데 성공한다면 clientMutationId를 반환해주기때문에
+    clientMutationId이 있어야 성공 했다는 뜻이된다 clientMutationId는 따로 지정안해서
+    반환될때마다 null이 나오기 때문에 위와 같은 조건식이 나왔다.
+  */
 
   const handleClick = () => {
     setOpen(!open);
@@ -126,35 +155,32 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
       if (!loading) {
         const habitConfirm = confirm("정말 했나요??");
         if (habitConfirm) {
-          /* console.log(today, habitId, userId); */
           runHabitCheck({
             variables: {
               userId,
               checkDate: today,
-              habitId
-            }
-          })
-          setHabitCheck(true);
+              habitId,
+            },
+          });
+          /* setHabitCheck(true); */
         }
-        //알럿을 올려두고 오케이하면 뮤테이션 실행후 체크 추가
-        //여기 뮤테이션은 habitcheck뮤테이션이 들어와야한다
       }
     } else {
       //체크된게 있다면
-      const habitCheckConfirm = confirm(
-        "이미 체크하신 습관입니다. 해제 하시겠습니까?"
-      );
-      if (habitCheckConfirm) {
-        if(runDeleteCheck){
-          runDeleteCheck({
-            variables:{
-              checkId:runDeleteCheckDataSet
-            }
-          })
-          setHabitCheck(true);
+      if (!loading) {
+        const habitCheckConfirm = confirm(
+          "이미 체크하신 습관입니다. 해제 하시겠습니까?"
+        );
+        if (habitCheckConfirm) {
+          if (runDeleteCheck) {
+            /* setHabitCheck(false); */
+            runDeleteCheck({
+              variables: {
+                checkId: runDeleteCheckDataSet,
+              },
+            });
+          }
         }
-        
-        /* setHabitCheck(false); */
       }
     }
   };

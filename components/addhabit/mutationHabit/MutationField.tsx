@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -6,6 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 
 interface MutationFieldType {
   userName: String;
@@ -38,13 +39,15 @@ const SET_HABIT = gql`
 const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
   const [habitTitle, sethabitTitle] = useState<String>("");
   const [habitText, sethabitText] = useState<String>("");
-  const [age, setAge] = useState("");//요일 선택하면 담길 요일별인덱스번호
+  const [age, setAge] = useState(""); //요일 선택하면 담길 요일별인덱스번호
+
+  const route = useRouter()
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
-  };//habit 테이블 week속성을 INT로 받기로 되있어서 처음부터 number로 받으면 좋지만..
-    //해당 ui컴포넌트는 string만을 받게 타입지정이 되어 있는듯하다 타입을 바꾸고 싶으면 
-    //커스텀 컴포넌트api를 사용해야 될듯하다.
+  }; //habit 테이블 week속성을 INT로 받기로 되있어서 처음부터 number로 받으면 좋지만..
+  //해당 ui컴포넌트는 string만을 받게 타입지정이 되어 있는듯하다 타입을 바꾸고 싶으면
+  //커스텀 컴포넌트api를 사용해야 될듯하다.
 
   const [setHabit, { data, loading }] = useMutation(SET_HABIT, {
     onError: (error) => {
@@ -52,8 +55,18 @@ const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
     },
   });
 
+  useEffect(() => {
+    if (data) {
+      if(data?.createMyhabit?.clientMutationId == null){
+        alert("추가되었습니다!")
+        route.push("/addHabit")
+      };
+    }
+  }, [loading]);
+
   const runMutationHabitBtn = () => {
-    if (habitTitle !== "" && habitText !== "" && age !== "") {//작성한게 있다면
+    if (habitTitle !== "" && habitText !== "" && age !== "") {
+      //작성한게 있다면
       /* console.log(userName, habitTitle, habitText, Number(age)); */
       setHabit({
         variables: {
@@ -64,7 +77,7 @@ const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
         },
       });
     } else {
-      setFailAlert(true);//위 조건을 만족못하면 알람을 켜줄것임
+      setFailAlert(true); //위 조건을 만족못하면 알람을 켜줄것임
     }
   };
   return (

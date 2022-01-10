@@ -10,6 +10,9 @@ interface TodayHabitTypeProps {
 
 const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   const [myhabit, setMyHabit] = useState<any[]>(); //타입을 바꿀 필요가 있음 애니타입 별로...
+
+
+
   const GET_USER_INFO = gql`
     query MyQuery($userId: String!, $habitWeek: Int!) {
       userByUserId(userId: $userId) {
