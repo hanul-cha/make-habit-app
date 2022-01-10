@@ -107,8 +107,10 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
     userId
   }
 
-  const sendCheck = UseMutationHabitCheck(checkData)
-  sendCheck
+  const sendCheck = UseMutationHabitCheck(checkData)//쿼리, 뮤테이션이 있는 커스텀훅
+  const runDeleteCheck = sendCheck?.runDeleteCheck//뮤테이션의 액션함수
+  const runDeleteCheckDataSet = sendCheck?.dataSet
+  
 
   const handleClick = () => {
     setOpen(!open);
@@ -143,6 +145,14 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
         "이미 체크하신 습관입니다. 해제 하시겠습니까?"
       );
       if (habitCheckConfirm) {
+        if(runDeleteCheck){
+          runDeleteCheck({
+            variables:{
+              checkId:runDeleteCheckDataSet
+            }
+          })
+          setHabitCheck(true);
+        }
         
         /* setHabitCheck(false); */
       }

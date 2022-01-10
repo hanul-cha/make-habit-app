@@ -46,16 +46,16 @@ const UseMutationHabitCheck = ({
   });
 
   
-  let dataSet;
   if (!loading) {
-    dataSet = data.allHabitchecks.nodes[0].checkId
+    const dataSet = data?.allHabitchecks?.nodes[0]?.checkId
+    return {
+      runDeleteCheck,
+      dataSet,
+      returnData:runDeleteCheckData.data
+    };
   }
-  console.log(dataSet)
 
-  return {
-    runDeleteCheck,
-    dataSet
-  };
+  
 };
 
 export default UseMutationHabitCheck;
