@@ -106,10 +106,9 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
     today,
     userId
   }
-  console.log(checkData)
 
   const sendCheck = UseMutationHabitCheck(checkData)
-  console.log(sendCheck)
+  sendCheck
 
   const handleClick = () => {
     setOpen(!open);
@@ -143,15 +142,9 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
       const habitCheckConfirm = confirm(
         "이미 체크하신 습관입니다. 해제 하시겠습니까?"
       );
-      /* const checkData = {
-        habitId,
-        today,
-        userId
-      } */
       if (habitCheckConfirm) {
-        /* const sendCheck = UseMutationHabitCheck(checkData)
-        console.log(sendCheck) */
-        setHabitCheck(false);
+        
+        /* setHabitCheck(false); */
       }
     }
   };

@@ -23,22 +23,39 @@ const UseMutationHabitCheck = ({
     }
   `;
 
+  const DELETE_CHECK = gql`
+    mutation MyMutation($checkId: Int!) {
+      deleteHabitcheckByCheckId(input: { checkId: $checkId }) {
+        clientMutationId
+      }
+    }
+  `;
+
   const { loading, data } = useQuery(GET_CHECKID, {
     variables: {
       habitId,
       userId,
-      checkDate:today,
+      checkDate: today,
     },
   });
 
-  console.log(data);
+  const [runDeleteCheck, runDeleteCheckData] = useMutation(DELETE_CHECK, {
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
-  let dataSet = {
-    data,
-    loading,
+  
+  let dataSet;
+  if (!loading) {
+    dataSet = data.allHabitchecks.nodes[0].checkId
+  }
+  console.log(dataSet)
+
+  return {
+    runDeleteCheck,
+    dataSet
   };
-
-  return dataSet;
 };
 
 export default UseMutationHabitCheck;
