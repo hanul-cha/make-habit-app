@@ -10,6 +10,7 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import UseMutationHabitCheck from "./UseMutationHabitCheck";
 import { useRouter } from "next/router";
+import { Router } from "express";
 
 interface DrawingHabitType {
   e?: {
@@ -76,21 +77,28 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
     },
   }); //취미의 아이디를 넣어 뽑은 체크여부리스트를 가져오는 아폴로쿼리
 
+  interface nodeType {
+    node:{
+      __typename : string
+      checkDate :number
+    }
+  }
+
   React.useEffect(() => {
     if (!loading) {
       if (data.allHabitchecks.edges.length !== 0) {
-        data.allHabitchecks.edges.map((node: DrawNodeType) => {
-          if (node.node?.checkDate == today) {
+        const node: nodeType[] = data.allHabitchecks.edges;
+        for (let i = 0; i < node.length; i++) {
+          if (node[i].node.checkDate == today) {
             setHabitCheck(true);
+            break;
           } else {
-            /* setHabitCheck(false); */
+            setHabitCheck(false);
           }
-        });
+        }
       }
     }
-  },[loading]);//이로직은 처음 실행되고나서 쿼리로딩이 끝나면 조건에 맞는 데이터가 있다면 체크 표시를 해주는 로직임
-
-  /* console.log(habitId, data) */
+  }); //이로직은 처음 실행되고나서 쿼리로딩이 끝나면 조건에 맞는 데이터가 있다면 체크 표시를 해주는 로직임
 
   const [runHabitCheck, runHabitCheckData] = useMutation(SET_HABITCHECK, {
     onError: (error) => {
@@ -107,45 +115,12 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const sendCheck = UseMutationHabitCheck(checkData); //쿼리, 뮤테이션이 있는 커스텀훅
   const runDeleteCheck = sendCheck?.runDeleteCheck; //뮤테이션의 액션함수
   const runDeleteCheckDataSet = sendCheck?.dataSet;
-  const runDeleteCheckReturnData = sendCheck?.returnData;
+  /* const runDeleteCheckReturnData = sendCheck?.returnData; */
 
   /* console.log(runHabitCheckData.loading, runHabitCheckData.data); */
-  if(habitId == 3){
-    console.log(habitId, data, runDeleteCheckReturnData?.loading, runDeleteCheckReturnData?.data);
-    console.log(checkData, sendCheck)
+  if (habitId == 3) {
+    console.log(data);
   }
-  
-
-  React.useEffect(() => {
-    if (runHabitCheckData.data !== undefined) {
-      if (runHabitCheckData.data?.createHabitcheck?.clientMutationId == null) {
-        console.log("체크성공이야??");
-        console.log("체크성공이야!!");
-        setHabitCheck(true);
-        console.log(habitCheck)
-        /* route.push("/"); */
-      }
-    } //createMutation성공시
-  });
-  React.useEffect(() => {
-    if (runDeleteCheckReturnData?.data !== undefined) {
-      if (
-        runDeleteCheckReturnData?.data?.deleteHabitcheckByCheckId
-          ?.clientMutationId == null
-      ) {
-        console.log("체크해제 성공이야??");
-        console.log("체크해제 성공이야!!");
-        /* route.push("/") */
-        setHabitCheck(false);
-        console.log(habitCheck)
-      }
-    } //deleteMutation성공시
-  });
-  /* 
-    뮤테이션이 실패하면 오류만 반환하는데 성공한다면 clientMutationId를 반환해주기때문에
-    clientMutationId이 있어야 성공 했다는 뜻이된다 clientMutationId는 따로 지정안해서
-    반환될때마다 null이 나오기 때문에 위와 같은 조건식이 나왔다.
-  */
 
   const handleClick = () => {
     setOpen(!open);
@@ -169,6 +144,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
             },
           });
           /* setHabitCheck(true); */
+          route.push("/");
         }
       }
     } else {
@@ -185,6 +161,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
                 checkId: runDeleteCheckDataSet,
               },
             });
+            route.push("/");
           }
         }
       }
@@ -238,16 +215,4 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
 
 export default DrawingHabit;
 
-/* 
-오늘 할일이 있다면 그려줄 컴포넌트
 
-이 컴포넌트의 뮤테이트 아직 미완성
-*/
-
-
-/* 
-문제파악
-훅으로 들어온 tsx는 이미 할당되있는 친구가 있음
-체크랑 해제 모두 첫 작업을 잘되지만 각자 작업을 수행하고 나선 그 작업의 반대되는
-조건문들은 이미 조건을 충족해서 체크표시를 하는데에 충돌이있음
-*/
