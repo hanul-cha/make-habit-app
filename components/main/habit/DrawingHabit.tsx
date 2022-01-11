@@ -68,7 +68,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const month = ("0" + (1 + date.getMonth())).slice(-2);
   const day = ("0" + date.getDate()).slice(-2);
   const today = /* 20220101; */ Number(year + month + day); //오늘날짜 현재는 테스트날자임
-  console.log(today)
+  
 
   const habitId: number | undefined = e?.node?.habitId; //해당컴포넌트에서 사용할 취미의 아이디
 
@@ -84,7 +84,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
       checkDate :number
     }
   }
-
+  console.log(e, loading)
   React.useEffect(() => {
     if (!loading) {
       if (data.allHabitchecks.edges.length !== 0) {

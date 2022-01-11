@@ -424,3 +424,12 @@ a{
   z-index: 100;
 }
 
+
+/* loadingPage */
+.loadingPage {
+  width: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  background: #fff;
+}
+
