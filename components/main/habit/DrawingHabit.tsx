@@ -67,7 +67,8 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const year = date.getFullYear();
   const month = ("0" + (1 + date.getMonth())).slice(-2);
   const day = ("0" + date.getDate()).slice(-2);
-  const today = 20220101; /* Number(year + month + day); */ //오늘날짜 현제는 테스트날자임
+  const today = /* 20220101; */ Number(year + month + day); //오늘날짜 현재는 테스트날자임
+  console.log(today)
 
   const habitId: number | undefined = e?.node?.habitId; //해당컴포넌트에서 사용할 취미의 아이디
 
@@ -96,7 +97,10 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
             setHabitCheck(false);
           }
         }
+      } else {
+        setHabitCheck(false);
       }
+      
     }
   }); //이로직은 처음 실행되고나서 쿼리로딩이 끝나면 조건에 맞는 데이터가 있다면 체크 표시를 해주는 로직임
 
@@ -116,11 +120,6 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const runDeleteCheck = sendCheck?.runDeleteCheck; //뮤테이션의 액션함수
   const runDeleteCheckDataSet = sendCheck?.dataSet;
   /* const runDeleteCheckReturnData = sendCheck?.returnData; */
-
-  /* console.log(runHabitCheckData.loading, runHabitCheckData.data); */
-  if (habitId == 3) {
-    console.log(data);
-  }
 
   const handleClick = () => {
     setOpen(!open);

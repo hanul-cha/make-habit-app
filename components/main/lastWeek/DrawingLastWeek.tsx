@@ -45,7 +45,7 @@ const DrawingLastWeek = ({
   //오늘날짜
 
   const lastWeek = (plus: number) => {
-    const lastWeekDate = new Date("2022-01-01"); //테스트를 위한 날짜
+    const lastWeekDate = new Date(/* "2022-01-01" */); //테스트를 위한 날짜
     const getDay = lastWeekDate.getDay();
     const newDate =
       lastWeekDate.getDate() - getDay + (getDay == 0 ? -6 : 1) - 7 + plus;
