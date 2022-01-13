@@ -10,7 +10,6 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import UseMutationHabitCheck from "./UseMutationHabitCheck";
 import { useRouter } from "next/router";
-import { Router } from "express";
 
 interface DrawingHabitType {
   e?: {
@@ -18,14 +17,6 @@ interface DrawingHabitType {
     __typename?: string;
   };
   userId: string | undefined;
-}
-
-interface DrawNodeType {
-  node?: {
-    checkDate?: number;
-    __typename?: string;
-  };
-  __typename?: string;
 }
 
 const GET_USER_INFO = gql`
@@ -84,7 +75,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
       checkDate :number
     }
   }
-  console.log(e, loading)
+  console.log(data, loading)
   React.useEffect(() => {
     if (!loading) {
       if (data.allHabitchecks.edges.length !== 0) {

@@ -52,6 +52,7 @@ const JoinMain = () => {
       setJoinFailAlert(true);
     }
   };
+  //조건에 맞으면 뮤테이션을 실행하고 아니라면 경고창을 켜줌
 
   useEffect(() => {
     if (data) {
