@@ -7,9 +7,10 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { useQuery, gql, useMutation, useReactiveVar } from "@apollo/client";
 import UseMutationHabitCheck from "./UseMutationHabitCheck";
 import { useRouter } from "next/router";
+import { setMainLoadding } from "../../../src/store/apply";
 
 interface DrawingHabitType {
   e?: {
@@ -59,7 +60,6 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const month = ("0" + (1 + date.getMonth())).slice(-2);
   const day = ("0" + date.getDate()).slice(-2);
   const today = /* 20220101; */ Number(year + month + day); //오늘날짜 현재는 테스트날자임
-  
 
   const habitId: number | undefined = e?.node?.habitId; //해당컴포넌트에서 사용할 취미의 아이디
 
@@ -70,12 +70,12 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   }); //취미의 아이디를 넣어 뽑은 체크여부리스트를 가져오는 아폴로쿼리
 
   interface nodeType {
-    node:{
-      __typename : string
-      checkDate :number
-    }
+    node: {
+      __typename: string;
+      checkDate: number;
+    };
   }
-  console.log(data, loading)
+  console.log(data, loading);
   React.useEffect(() => {
     if (!loading) {
       if (data.allHabitchecks.edges.length !== 0) {
@@ -91,9 +91,15 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
       } else {
         setHabitCheck(false);
       }
-      
     }
   }); //이로직은 처음 실행되고나서 쿼리로딩이 끝나면 조건에 맞는 데이터가 있다면 체크 표시를 해주는 로직임
+
+  
+
+  if (!loading) {
+    console.log("로딩완료");
+    setMainLoadding(true)
+  }
 
   const [runHabitCheck, runHabitCheckData] = useMutation(SET_HABITCHECK, {
     onError: (error) => {
@@ -204,5 +210,3 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
 };
 
 export default DrawingHabit;
-
-
