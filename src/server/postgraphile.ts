@@ -1,6 +1,12 @@
-import { config } from './config';
+import { configSER, configDEV } from './config';
 import { Pool } from 'pg';
 import { postgraphile } from "postgraphile";
+
+const config = configDEV 
+/* 
+  configSER : 실서비스용 데이터베이스
+  configDEV : 로컬환경의 데이터베이스
+  */
 
 const pool = new Pool({
     user: config.DB_USER,
