@@ -100,6 +100,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
     console.log("로딩완료");
     setMainLoadding(true)
   }
+  //이곳 로딩이 끝나면 apollo캐시를 바꿔줌
 
   const [runHabitCheck, runHabitCheckData] = useMutation(SET_HABITCHECK, {
     onError: (error) => {
