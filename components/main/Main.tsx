@@ -6,6 +6,7 @@ import TodayHabit from "./habit/TodayHabit";
 import PleaseLogin from "./PleaseLogin";
 import { Button } from "@mui/material";
 import LastWeek from "./lastWeek/LastWeek";
+import { setMainLoadding } from "../../src/store/apply";
 
 interface MainTypeProps {
   loginUser: string;
@@ -27,6 +28,9 @@ const Main = ({
   setLoginUser,
   setUserInfo,
 }: MainTypeProps) => {
+  const [toDayLoading, setToDayLoading] = useState(false)
+  const [lastWeekLoading, setLastWeekLoading] = useState(false)
+
   const router = useRouter();
   let user = router.query;
 
@@ -63,7 +67,16 @@ const Main = ({
       console.log(userInfo) 
       */
     }
+    if(toDayLoading && lastWeekLoading) {
+      setMainLoadding(true)
+    }
   });
+
+  useEffect(() => {
+    return () => {
+      setMainLoadding(false)
+    }
+  },[])
 
   const removeCookie = () => {
     axios.get("/api/logout").then((res) => {
@@ -93,9 +106,9 @@ const Main = ({
               logout
             </Button>
           </div>
-          <TodayHabit userId={userInfo?.userId} />
+          <TodayHabit userId={userInfo?.userId} setToDayLoading={setToDayLoading} />
           {/* 그려질 첫컴포넌트론 오늘의 할일을 그려줄것임 */}
-          <LastWeek userId={userInfo?.userId} />
+          <LastWeek userId={userInfo?.userId} setLastWeekLoading={setLastWeekLoading} />
           {/* 저번주와 비교하는 컴포넌트 */}
           
         </div>

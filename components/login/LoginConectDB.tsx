@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios  from "axios";
 import UseGraphql from "../customhooks/UseGraphql";
+import { setMainLoadding } from "../../src/store/apply";
 
 interface LoginConectDbTypeProps {
   id: string;
@@ -20,6 +21,12 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
 
   const { loading, data } = UseGraphql(id)
   //graphql 쿼리가 있는 커스텀훅
+
+  if(loading){
+    setMainLoadding(false)
+  } else {
+    setMainLoadding(true)
+  }
   
   useEffect(() => {
     if (!loading) {

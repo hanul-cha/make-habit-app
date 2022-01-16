@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TextField, Button, Alert, AlertTitle } from "@mui/material";
 
 import LoginConectDB from "./LoginConectDB";
+import { setMainLoadding } from "../../src/store/apply";
 
 const LoginMain = () => {
   const [id, setId] = useState("");
@@ -13,6 +14,10 @@ const LoginMain = () => {
     setDoLogin(true);
   };
   //로그인 로직 컴포넌트 실행
+
+  useEffect(() => {
+    setMainLoadding(true)
+  },[])
 
   useEffect(() => {
     return () => {

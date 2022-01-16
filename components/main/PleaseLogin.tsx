@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import { setMainLoadding } from "../../src/store/apply";
 
 const PleaseLogin = () => {
+  setMainLoadding(true)
+  useEffect(() => {
+    return () => {
+      setMainLoadding(false)
+    }
+  },[])
   return (
     <div className="pleaseLogin">
       <h2 className="pleaseLoginTitle"><span className="pleaseLoginInner">로그인</span>이 필요합니다</h2>

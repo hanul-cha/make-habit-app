@@ -13,6 +13,10 @@ const JoinMain = () => {
 
   const router = useRouter();
 
+  useEffect(() => {
+    console.log("마운트")
+  },[])
+
   const SET_USER = gql`
     mutation MyMutation($userId: String!, $name: String!, $password: String!) {
       createUser(

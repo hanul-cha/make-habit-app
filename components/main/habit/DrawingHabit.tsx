@@ -75,7 +75,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
       checkDate: number;
     };
   }
-  console.log(data, loading);
+  /* console.log(data, loading); */
   React.useEffect(() => {
     if (!loading) {
       if (data.allHabitchecks.edges.length !== 0) {
@@ -92,12 +92,13 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
         setHabitCheck(false);
       }
     }
+    setMainLoadding(true)
   }); //이로직은 처음 실행되고나서 쿼리로딩이 끝나면 조건에 맞는 데이터가 있다면 체크 표시를 해주는 로직임
 
   
 
   if (!loading) {
-    console.log("로딩완료");
+    /* console.log("로딩완료"); */
     setMainLoadding(true)
   }
   //이곳 로딩이 끝나면 apollo캐시를 바꿔줌

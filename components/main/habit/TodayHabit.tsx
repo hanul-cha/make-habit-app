@@ -6,11 +6,11 @@ import Link from "next/link";
 
 interface TodayHabitTypeProps {
   userId: string | undefined;
+  setToDayLoading: (a:boolean) => void
 }
 
-const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
+const TodayHabit = ({ userId, setToDayLoading }: TodayHabitTypeProps) => {
   const [myhabit, setMyHabit] = useState<any[]>(); //타입을 바꿀 필요가 있음 애니타입 별로...
-
 
 
   const GET_USER_INFO = gql`
@@ -44,8 +44,14 @@ const TodayHabit = ({ userId }: TodayHabitTypeProps) => {
   useEffect(() => {
     if (!loading) {
       setMyHabit(data?.userByUserId?.myhabitsByUserId?.edges);
+      setToDayLoading(true)
     }
   });
+  useEffect(() => {
+    return () => {
+      setToDayLoading(false)
+    }
+  },[])
 
   return (
     <>

@@ -6,9 +6,11 @@ import Link from "next/link";
 
 interface LastWeekTypeProps {
   userId: string | undefined;
+  setLastWeekLoading: (a:boolean)=> void
 }
 
-const LastWeek = ({ userId }: LastWeekTypeProps) => {
+const LastWeek = ({ userId, setLastWeekLoading }: LastWeekTypeProps) => {
+
   const GET_WEEK_HABIT = gql`
     query MyQuery($userId: String!) {
       userByUserId(userId: $userId) {
@@ -50,13 +52,17 @@ const LastWeek = ({ userId }: LastWeekTypeProps) => {
     },
   });
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (!weekLoad.loading && !checkLoad.loading && userId !== undefined) {
-      console.log(weekLoad.data);
-      console.log(checkLoad.data);
+      setLastWeekLoading(true)
     }
-    //값 확인할때 풀어줄 주석입니다.
-  }); */
+  })
+
+  useEffect(() => {
+    return () => {
+      setLastWeekLoading(false)
+    }
+  },[])
 
   /* console.log(userId); */
   return (
