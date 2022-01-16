@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TextField, Button, Alert, AlertTitle } from "@mui/material";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import { setMainLoadding } from "../../src/store/apply";
 
 const JoinMain = () => {
   const [joinId, joinSetId] = useState("");
@@ -11,11 +12,11 @@ const JoinMain = () => {
   const [JoinFailAlert, setJoinFailAlert] = useState(false);//공백 또는 확인 비번이 틀렸을때 알럿
   const [dontUseThisId, setdontUseThisId] = useState(false);//중복되는 아이디가 있을때 알럿
 
-  const router = useRouter();
-
   useEffect(() => {
-    console.log("마운트")
+    setMainLoadding(true)
   },[])
+
+  const router = useRouter();
 
   const SET_USER = gql`
     mutation MyMutation($userId: String!, $name: String!, $password: String!) {
@@ -28,7 +29,7 @@ const JoinMain = () => {
   `;
   //뮤테이션 로직, 반환값은 임의의 값을 할당함 = 아무값이나 전달이 되면 오류없이 뮤테이트 되었다는 뜻이기 때문
 
-  const [setUser, { data }] = useMutation(SET_USER, {
+  const [setUser, { data, loading }] = useMutation(SET_USER, {
     onError: (error) => {
       console.log(error);
       setdontUseThisId(true);
@@ -61,6 +62,11 @@ const JoinMain = () => {
   useEffect(() => {
     if (data) {
       router.push("/login")
+    }
+    if (loading) {
+      setMainLoadding(false)
+    } else {
+      setMainLoadding(true)
     }
   })
   //뮤테이션 로딩이끝나고 데이터베이스에 반영이 되면 data로 쿼리에서 지정한 값을 가져온다

@@ -7,6 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import { setMainLoadding } from "../../../src/store/apply";
 
 interface MutationFieldType {
   userName: String;
@@ -54,6 +55,12 @@ const MutationField = ({ userName, setFailAlert }: MutationFieldType) => {
       console.log(error);
     },
   });
+
+  if(loading){
+    setMainLoadding(false)
+  } else {
+    setMainLoadding(true)
+  }
 
   useEffect(() => {
     if (data) {

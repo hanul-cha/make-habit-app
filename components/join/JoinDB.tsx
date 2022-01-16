@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
 
 interface JoinDBTypeProps {
   joinId: string;
@@ -22,8 +21,6 @@ const JoinDB = ({
   setdontUseThisId,
 }: JoinDBTypeProps) => {
   console.log("on");
-
-  const router = useRouter();
 
   const SET_USER = gql`
     mutation MyMutation($userId: String!, $name: String!, $password: String!) {
@@ -60,12 +57,10 @@ const JoinDB = ({
         }
       })
       if(loading && data){
-        console.log("yes")
         setRunJoin(false)
       } else if(loading) {
         setRunJoin(false)
       }
-      console.log(data)
       
     } else {
       setJoinFailAlert(true)

@@ -5,6 +5,7 @@ import { useQuery, gql } from "@apollo/client";
 import HobbiesByDay from "./HobbiesByDay";
 import MutationHabit from "./mutationHabit/MutationHabit";
 import { Alert, AlertTitle } from "@mui/material";
+import { setMainLoadding } from "../../src/store/apply";
 
 const GET_WEEK_HABIT = gql`
   query MyQuery($userInfo: String!) {
@@ -31,26 +32,33 @@ const AddhabitMain = () => {
     }, 5000);
   }, [failAlert]); //failAlert 상태가 변할때마다 실행함
 
+  const { data, loading } = useQuery(GET_WEEK_HABIT, {
+    variables: {
+      userInfo,
+    },
+  });
+
   useEffect(() => {
     axios.get("/api/isLogin").then((res) => {
       if (res.status === 200 && res.data.id) {
         setUserInfo(res.data.id);
       }
     });
+
+    if(!loading){
+      setMainLoadding(true)
+    }
   });
 
   useEffect(() => {
     return () => {
       setFailAlert(false)
+      setMainLoadding(false)
     };
-  }, []);
-  
+  }, []);//클린업
 
-  const { data, loading } = useQuery(GET_WEEK_HABIT, {
-    variables: {
-      userInfo,
-    },
-  });
+  
+  
 
   return (
     <>
