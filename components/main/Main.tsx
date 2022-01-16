@@ -71,6 +71,7 @@ const Main = ({
       setMainLoadding(true)
     }//하위컴포넌트의 로딩이 끝나면 로딩창을 꺼줌
   });
+  console.log(toDayLoading, lastWeekLoading)
 
   useEffect(() => {
     return () => {
