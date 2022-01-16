@@ -44,6 +44,7 @@ const TodayHabit = ({ userId, setToDayLoading }: TodayHabitTypeProps) => {
   useEffect(() => {
     if (!loading) {
       setMyHabit(data?.userByUserId?.myhabitsByUserId?.edges);
+      setToDayLoading(true);
     }
   });//로딩이끝나면 내취미에 할당해주고 로딩셋팅을 해줌
   
