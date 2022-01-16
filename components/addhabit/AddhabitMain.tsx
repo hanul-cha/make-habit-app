@@ -28,7 +28,7 @@ const AddhabitMain = () => {
 
   useEffect(() => {
     setTimeout(() => {
-        setFailAlert(false);
+      setFailAlert(false);
     }, 5000);
   }, [failAlert]); //failAlert 상태가 변할때마다 실행함
 
@@ -45,24 +45,21 @@ const AddhabitMain = () => {
       }
     });
 
-    if(!loading){
-      setMainLoadding(true)
+    if (!loading) {
+      setMainLoadding(true);
     }
   });
 
   useEffect(() => {
     return () => {
-      setFailAlert(false)
-      setMainLoadding(false)
+      setFailAlert(false);
+      setMainLoadding(false);
     };
-  }, []);//클린업
-
-  
-  
+  }, []); //클린업
 
   return (
     <>
-    {failAlert && (
+      {failAlert && (
         <Alert severity="error">
           <AlertTitle>추가 실패</AlertTitle>
           <strong>빈칸이 있는지 확인해 주세요!!</strong>
@@ -71,7 +68,9 @@ const AddhabitMain = () => {
 
       {userInfo !== undefined ? (
         <div className="addHabit">
-          <h2><span>{data?.userByUserId?.name}</span>님의 취미</h2>
+          <h2>
+            <span>{data?.userByUserId?.name}</span>님의 취미
+          </h2>
           <MutationHabit userName={userInfo} setFailAlert={setFailAlert} />
           <HobbiesByDay node={data?.userByUserId?.myhabitsByUserId?.nodes} />
         </div>

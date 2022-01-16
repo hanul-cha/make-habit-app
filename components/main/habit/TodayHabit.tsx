@@ -32,7 +32,7 @@ const TodayHabit = ({ userId, setToDayLoading }: TodayHabitTypeProps) => {
   let date = new Date();
   const toDate = /* 6; */ date.getDay()
   //오늘 요일, 요넘이 habitWeek인자에 할당될것임
-  console.log(toDate)
+  /* console.log(toDate) */
 
   const { loading, data } = useQuery(GET_USER_INFO, {
     variables: {

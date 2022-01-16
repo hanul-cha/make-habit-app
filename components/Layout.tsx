@@ -13,7 +13,7 @@ const Layout = ({ children }: any) => {
 
   const { data, loading } = useQuery(GET_LOADING);
   //아폴로스토에서 첫 정의한 상태를 가져옴
-  console.log(data.getLoading.mainLoading);
+  /* console.log(data.getLoading.mainLoading); */
 
   return (
     <>

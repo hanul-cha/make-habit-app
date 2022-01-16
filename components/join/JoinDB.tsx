@@ -39,7 +39,7 @@ const JoinDB = ({
     }
   })
 
-  console.log(loading, data)
+  /* console.log(loading, data) */
 
   useEffect(() => {
     if (
