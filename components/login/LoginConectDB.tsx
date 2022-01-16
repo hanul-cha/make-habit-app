@@ -27,6 +27,7 @@ const LoginConectDB = ({/* 이컴포넌트는 단순히 로직을 수행하기 �
   } else {
     setMainLoadding(true)
   }
+  //로딩중이면 로딩창을 띄우고 아니면 끔
   
   useEffect(() => {
     if (!loading) {

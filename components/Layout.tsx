@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Nav from "./Nav";
 import { gql, useQuery } from "@apollo/client";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 
 const Layout = ({ children }: any) => {
   const GET_LOADING = gql`
@@ -18,12 +20,15 @@ const Layout = ({ children }: any) => {
       <div className="layout">
         <Nav />
         <div>{children}</div>
-        {data.getLoading.mainLoading?(
+        {data.getLoading.mainLoading ? (
           <></>
-        ):( 
-          <div className="mainLoading">로딩중</div>
-        )
-        }
+        ) : (
+          <div className="mainLoading">
+            <Box sx={{ width: '100%' }}>
+              <LinearProgress />
+            </Box>
+          </div>
+        )}
       </div>
     </>
   );

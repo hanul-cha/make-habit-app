@@ -56,13 +56,13 @@ const LastWeek = ({ userId, setLastWeekLoading }: LastWeekTypeProps) => {
     if (!weekLoad.loading && !checkLoad.loading && userId !== undefined) {
       setLastWeekLoading(true)
     }
-  })
+  })//로딩이 끝나고 할당까지 끝나면 로딩셋팅해줌
 
   useEffect(() => {
     return () => {
       setLastWeekLoading(false)
     }
-  },[])
+  },[])//클린업
 
   /* console.log(userId); */
   return (

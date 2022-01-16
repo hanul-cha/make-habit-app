@@ -10,6 +10,7 @@ const PleaseLogin = () => {
       setMainLoadding(false)
     }
   },[])
+  //컴포넌트가 활성화되면 로딩창을 끄고 언마운트되면 다시 켜줌
   return (
     <div className="pleaseLogin">
       <h2 className="pleaseLoginTitle"><span className="pleaseLoginInner">로그인</span>이 필요합니다</h2>

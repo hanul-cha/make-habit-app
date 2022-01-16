@@ -69,14 +69,14 @@ const Main = ({
     }
     if(toDayLoading && lastWeekLoading) {
       setMainLoadding(true)
-    }
+    }//하위컴포넌트의 로딩이 끝나면 로딩창을 꺼줌
   });
 
   useEffect(() => {
     return () => {
       setMainLoadding(false)
     }
-  },[])
+  },[])//언마운트되면 로딩창을 띄움
 
   const removeCookie = () => {
     axios.get("/api/logout").then((res) => {

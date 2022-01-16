@@ -22,6 +22,7 @@ const LoginMain = () => {
   useEffect(() => {
     return () => {
       setDoLogin(false);
+      setMainLoadding(false)
     };
   }, []);
   //다른 라우트로 이동하기 전에 꺼주는 클린업
