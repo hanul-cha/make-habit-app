@@ -44,14 +44,9 @@ const TodayHabit = ({ userId, setToDayLoading }: TodayHabitTypeProps) => {
   useEffect(() => {
     if (!loading) {
       setMyHabit(data?.userByUserId?.myhabitsByUserId?.edges);
-      setToDayLoading(true)
     }
   });//로딩이끝나면 내취미에 할당해주고 로딩셋팅을 해줌
-  useEffect(() => {
-    return () => {
-      setToDayLoading(false)
-    }
-  },[])//클린업
+  
 
   return (
     <>
@@ -59,7 +54,7 @@ const TodayHabit = ({ userId, setToDayLoading }: TodayHabitTypeProps) => {
         <div className="todayHabit_main">
           <h2>매주해야될 오늘의 습관</h2>
           {myhabit.map((e, i) => {
-            return <DrawingHabit e={e} key={i} userId={userId} />;
+            return <DrawingHabit e={e} key={i} userId={userId} setToDayLoading={setToDayLoading} />;
           })}
           {/* 오늘할일 리스트를 그려줄 컴포넌트를 인자수만큼 실행 */}
         </div>

@@ -11,6 +11,8 @@ import { useQuery, gql, useMutation, useReactiveVar } from "@apollo/client";
 import UseMutationHabitCheck from "./UseMutationHabitCheck";
 import { useRouter } from "next/router";
 import { setMainLoadding } from "../../../src/store/apply";
+import UseGraphqlGetCheckData from "../../customhooks/UseGraphqlGetCheckData";
+import GetHabitCheckData from "./GetHabitCheckData";
 
 interface DrawingHabitType {
   e?: {
@@ -18,20 +20,16 @@ interface DrawingHabitType {
     __typename?: string;
   };
   userId: string | undefined;
+  setToDayLoading: (a: boolean) => void;
 }
-
-const GET_USER_INFO = gql`
-  query MyQuery($habitId: Int!) {
-    allHabitchecks(condition: { habitId: $habitId }) {
-      edges {
-        node {
-          checkDate
-        }
-      }
-    }
-  }
-`;
 //해당 컴포넌트에 들어온 myhabit데이터의 pk값을 대입해 habitcheck의 fk값과 대조해 데이터를 가져온다
+
+interface nodeType {
+  node: {
+    __typename: string;
+    checkDate: number;
+  };
+}
 
 const SET_HABITCHECK = gql`
   mutation MyMutation($userId: String!, $habitId: Int!, $checkDate: Int!) {
@@ -49,9 +47,11 @@ const SET_HABITCHECK = gql`
   }
 `;
 
-const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
+const DrawingHabit = ({ e, userId, setToDayLoading }: DrawingHabitType) => {
   const [open, setOpen] = React.useState(false); //클릭여부를 저장하는 state
   const [habitCheck, setHabitCheck] = React.useState(false); //체크여부를 판단하는 state
+  const [drawingQueryData, setdrawingQueryData] = React.useState<nodeType[]>();
+  const [resetQueryData, setresetQueryData] = React.useState(false);
 
   const route = useRouter();
 
@@ -63,25 +63,35 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
 
   const habitId: number | undefined = e?.node?.habitId; //해당컴포넌트에서 사용할 취미의 아이디
 
-  const { loading, data } = useQuery(GET_USER_INFO, {
-    variables: {
-      habitId,
-    },
-  }); //취미의 아이디를 넣어 뽑은 체크여부리스트를 가져오는 아폴로쿼리
+  const { loading, data } = UseGraphqlGetCheckData(habitId); //취미의 아이디를 넣어 뽑은 체크여부리스트를 가져오는 아폴로쿼리
 
-  interface nodeType {
-    node: {
-      __typename: string;
-      checkDate: number;
-    };
-  }
-  /* console.log(data, loading); */
+  const [runHabitCheck, runHabitCheckData] = useMutation(SET_HABITCHECK, {
+    onError: (error) => {
+      console.log(error);
+    },
+  }); //취미체크를 추가할 뮤테이션 runHabitCheckData에는 데이터와 로딩이 들어가 있음
+
   React.useEffect(() => {
+    /* console.log(runHabitCheckData.data)
+    console.log(runDeleteCheckReturnData?.data) */
+
+    if (runHabitCheckData.data) {
+      /* setresetQueryData(true); */
+      runHabitCheckData.reset()
+      route.push('/')
+    }
+    if (runDeleteCheckReturnData?.data) {
+      /* setresetQueryData(true); */
+      runDeleteCheckReturnData.reset()
+      route.push('/')
+    }
+
     if (!loading) {
-      if (data.allHabitchecks.edges.length !== 0) {
-        const node: nodeType[] = data.allHabitchecks.edges;
-        for (let i = 0; i < node.length; i++) {
-          if (node[i].node.checkDate == today) {
+      setdrawingQueryData(data.allHabitchecks.edges);
+
+      if (drawingQueryData && drawingQueryData?.length !== 0) {
+        for (let i = 0; i < drawingQueryData.length; i++) {
+          if (drawingQueryData[i].node.checkDate == today) {
             setHabitCheck(true);
             break;
           } else {
@@ -91,23 +101,18 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
       } else {
         setHabitCheck(false);
       }
+
+      setToDayLoading(true);
+      /* console.log(drawingQueryData); */
     }
-    setMainLoadding(true)
   }); //이로직은 처음 실행되고나서 쿼리로딩이 끝나면 조건에 맞는 데이터가 있다면 체크 표시를 해주는 로직임
 
-  
-
-  if (!loading) {
-    /* console.log("로딩완료"); */
-    setMainLoadding(true)
-  }
-  //이곳 로딩이 끝나면 apollo캐시를 바꿔줌
-
-  const [runHabitCheck, runHabitCheckData] = useMutation(SET_HABITCHECK, {
-    onError: (error) => {
-      console.log(error);
-    },
-  }); //취미체크를 추가할 뮤테이션 runHabitCheckData에는 데이터와 로딩이 들어가 있음
+  React.useEffect(() => {
+    return () => {
+      setToDayLoading(false);
+      setresetQueryData(false);
+    };
+  }, []); //클린업
 
   const checkData = {
     habitId,
@@ -118,7 +123,7 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
   const sendCheck = UseMutationHabitCheck(checkData); //쿼리, 뮤테이션이 있는 커스텀훅
   const runDeleteCheck = sendCheck?.runDeleteCheck; //뮤테이션의 액션함수
   const runDeleteCheckDataSet = sendCheck?.dataSet;
-  /* const runDeleteCheckReturnData = sendCheck?.returnData; */
+  const runDeleteCheckReturnData = sendCheck?.returnData;
 
   const handleClick = () => {
     setOpen(!open);
@@ -141,8 +146,8 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
               habitId,
             },
           });
-          /* setHabitCheck(true); */
-          route.push("/");
+          /* route.push("/"); */
+          /* setresetQueryData(true) */
         }
       }
     } else {
@@ -153,13 +158,13 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
         );
         if (habitCheckConfirm) {
           if (runDeleteCheck) {
-            /* setHabitCheck(false); */
             runDeleteCheck({
               variables: {
                 checkId: runDeleteCheckDataSet,
               },
             });
-            route.push("/");
+            /* route.push("/"); */
+            /* setresetQueryData(true) */
           }
         }
       }
@@ -207,8 +212,23 @@ const DrawingHabit = ({ e, userId }: DrawingHabitType) => {
           </List>
         </div>
       )}
+
+      {resetQueryData && habitId && (
+        <GetHabitCheckData
+          setdrawingQueryData={setdrawingQueryData}
+          setresetQueryData={setresetQueryData}
+          habitId={habitId}
+        />
+      )}
     </>
   );
 };
 
 export default DrawingHabit;
+
+/* 
+state에 값들을 넣어줄것임 쿼리데이터를 넣어서 관리할것임
+처음 마운트되고 얻은 데이터를 state에 넣고 이후 체크버튼을 누르게 되면
+해당 뮤테이션 실행함수를 호출해 쿼리를 날리고 데이터를 받아 다시 state에
+할당하면 그 state에 대한 값으로 뮤테이션을 보낼수 있을것으로 기대됨
+*/
