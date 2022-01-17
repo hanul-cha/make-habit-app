@@ -6,61 +6,142 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background: #f2f2f2;
 }
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-*{
+* {
   color: #434343;
 }
 
 /* 제일상단레이아웃 */
-.layout{
-  max-width:600px;
+.layout {
+  max-width: 600px;
   min-height: 100vh;
   height: 100%;
   margin: 0 auto;
@@ -69,25 +150,23 @@ a{
   position: relative;
 }
 
-
-
 /* loginMain */
-.textField{
+.textField {
   display: block;
   width: 50%;
 }
 
-.textField>div {
+.textField > div {
   width: 100%;
 }
 
-.loginField{
+.loginField {
   display: grid;
   grid-template-rows: 70px 70px 40px;
   place-items: center;
 }
 
-.loginMainTitle{
+.loginMainTitle {
   text-align: center;
   color: coral;
   font-size: 37px;
@@ -98,33 +177,32 @@ a{
 /* 섹션별 margin은 30px로 고정 */
 
 /* main */
-.main_successLogin{/* 사실상 제일 첨에 보여줄곳의 css */
-  
+.main_successLogin {
+  /* 사실상 제일 첨에 보여줄곳의 css */
 }
 
-.holloUser{
+.holloUser {
   margin: 30px 10px;
   display: grid;
   grid-template-columns: 5fr 1fr;
   align-items: center;
 }
 
-.login_btn{
+.login_btn {
   background: #fff;
 }
 
-.main_userSpan{
+.main_userSpan {
   font-size: 20px;
   color: coral;
 }
 
-
 /* todayHabit */
-.todayHabit{
+.todayHabit {
   border: 1px solid #434343;
-}/* 요거 정채를 모르겠네??? */
+} /* 요거 정채를 모르겠네??? */
 
-.todayHabit_main{
+.todayHabit_main {
   background: rgb(255, 211, 218);
   padding: 10px;
   margin: 0 10px;
@@ -132,35 +210,33 @@ a{
   margin-bottom: 30px;
 }
 
-.todayHabit_main h2{
+.todayHabit_main h2 {
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 20px;
 }
 
-.drawListTitle span{
+.drawListTitle span {
   font-weight: 600;
 }
 
-.noHabit{
+.noHabit {
   background: rgb(255, 211, 218);
   padding: 10px;
   margin: 0 10px;
   border-radius: 10px;
-  margin-bottom: 30px;/* 바로 아래 컨텐츠와의 마진 */
+  margin-bottom: 30px; /* 바로 아래 컨텐츠와의 마진 */
 }
 .noHabit h2 {
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-
-
 /* drawingHabit 
    오늘의 할일부분
 */
 
-.draw_checkBTN{
+.draw_checkBTN {
   border: none;
   background: none;
   width: 23px;
@@ -168,38 +244,37 @@ a{
   margin-right: 10px;
 }
 
-
 /* pleaseLogin */
-.pleaseLogin{
+.pleaseLogin {
   display: grid;
   grid-template-rows: 4fr 3fr 3fr;
   place-items: center;
 }
 
-.pleaseLoginTitle{
+.pleaseLoginTitle {
   font-size: 30px;
   text-align: center;
 }
 
-.pleaseLoginSection{
+.pleaseLoginSection {
   width: 50%;
   margin-bottom: 20px;
   /* background: red; */
 }
 
-.pleaseLoginSection p, .pleaseLoginSection h3{
+.pleaseLoginSection p,
+.pleaseLoginSection h3 {
   margin-bottom: 10px;
 }
 
-.pleaseLoginInner{
+.pleaseLoginInner {
   color: coral;
   font-size: 37px;
   font-weight: 600;
 }
 
-
 /* lastweek */
-.noLastWeekHabit{
+.noLastWeekHabit {
   background: rgb(177, 189, 252);
   padding: 10px;
   margin: 0 10px;
@@ -212,13 +287,12 @@ a{
 
 .noLastWeekHabit p {
   font-size: 14px;
+  margin-bottom: 10px;
 }
 
-.lastWeek_btn{
-  margin-top: 10px;
-  background: #fff;
+.lastWeek_btn a {
+  color: #1976d2;
 }
-
 
 /* drawingLastWeek */
 .lastWeek {
@@ -226,10 +300,9 @@ a{
   padding: 10px;
   margin: 0 10px;
   border-radius: 10px;
-  
 }
 
-.lastWeek h2{
+.lastWeek h2 {
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 20px;
@@ -240,11 +313,11 @@ a{
   font-size: 20px;
 }
 
-.lastWeekList{
- /*  background: pink; */
+.lastWeekList {
+  /*  background: pink; */
 }
 
-.drawingLastWeekSlide{
+.drawingLastWeekSlide {
   /* background: rgb(232, 236, 255); */
   margin: 0 8px;
   padding-top: 10px;
@@ -257,7 +330,7 @@ a{
   border-bottom: solid 3px rgb(232, 236, 255);
 }
 
-.lastWeekTableHeader{
+.lastWeekTableHeader {
   display: grid;
   grid-template-columns: 4fr 1fr;
   margin: 10px 0;
@@ -273,19 +346,18 @@ a{
   padding-right: 10px;
 }
 
-.lastWeekUL{
+.lastWeekUL {
   /* background: yellow; */
   display: grid;
   row-gap: 10px;
 }
 
-.lastWeekListLI{
+.lastWeekListLI {
   background: rgb(232, 236, 255);
   display: grid;
   padding: 20px 0;
   align-items: center;
   grid-template-columns: 3fr 1fr;
-  
 }
 .lastWeekListLI h4 {
   margin-left: 10px;
@@ -300,9 +372,8 @@ a{
   align-items: center;
 }
 
-
 /* join */
-.joinMainTitle{
+.joinMainTitle {
   text-align: center;
   color: coral;
   font-size: 37px;
@@ -311,36 +382,34 @@ a{
   font-weight: 600;
 }
 
-.joinTextField{
+.joinTextField {
   display: block;
   width: 50%;
 }
 
-.joinTextField>div {
+.joinTextField > div {
   width: 100%;
 }
 
-.joinField{
+.joinField {
   display: grid;
   grid-template-rows: 70px 70px 70px 70px 40px;
   place-items: center;
 }
 
-.join_btn{
+.join_btn {
   background: #fff;
 }
 
-
 /* mutationHabit */
-.addHabit>h2 {
+.addHabit > h2 {
   margin: 30px 10px;
 }
 
-.addHabit>h2>span {
+.addHabit > h2 > span {
   font-size: 20px;
   color: coral;
 }
-
 
 .mutationHabitWrapper {
   background: rgb(177, 222, 252);
@@ -349,7 +418,6 @@ a{
   margin-bottom: 30px;
   border-radius: 10px;
 }
-
 
 .mutationHabitTitle span {
   font-weight: 600;
@@ -386,7 +454,7 @@ a{
   padding: 10px;
 }
 
-.HobbiesByDay>h2 {
+.HobbiesByDay > h2 {
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 20px;
@@ -399,32 +467,31 @@ a{
 .clickArea {
   display: grid;
   /* background: yellow; */
-  padding: 15PX;
+  padding: 15px;
   grid-template-columns: 1fr auto;
 }
 
-.clickAreaSpan{
+.clickAreaSpan {
   color: rgb(20, 149, 255);
 }
 
-.haveHobbie, .tryAddBabit {
+.haveHobbie,
+.tryAddBabit {
   border: 3px solid rgb(204, 252, 236);
   padding: 10px;
 }
 
-.haveHobbie>div {
+.haveHobbie > div {
   margin-bottom: 10px;
 }
-.haveHobbie>div:last-child {
+.haveHobbie > div:last-child {
   margin-bottom: 0;
 }
 
-
 /* nav */
-.navStack{
+.navStack {
   z-index: 100;
 }
-
 
 /* loadingPage */
 .loadingPage {
@@ -446,3 +513,11 @@ a{
   align-items: center;
 }
 
+.Button {
+  color: white;
+}
+
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+  -webkit-tap-highlight-color: #fff;
+  background-color: #fff;
+}

@@ -80,7 +80,8 @@ const LastWeek = ({ userId, setLastWeekLoading }: LastWeekTypeProps) => {
             <div className="noLastWeekHabit">
               <h2>저번주에 해야할 습관이 없습니다.</h2>
               <p>혹시 아직 일정 추가를 안하셨나요?</p>
-              <Button className="lastWeek_btn" variant="outlined">
+              
+              <Button className="lastWeek_btn" variant="outlined" >
                 <Link href="/addHabit">
                   <a>추가하기</a>
                 </Link>
