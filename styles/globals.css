@@ -400,6 +400,9 @@ a {
 .join_btn {
   background: #fff;
 }
+.join_btn a{
+  color: #1976d2;
+}
 
 /* mutationHabit */
 .addHabit > h2 {

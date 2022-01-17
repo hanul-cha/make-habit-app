@@ -9,12 +9,14 @@ const JoinMain = () => {
   const [joinName, joinSetName] = useState("");
   const [joinPsword, joinSetpsword] = useState("");
   const [joinPswordCheck, joinSetpswordCheck] = useState("");
-  const [JoinFailAlert, setJoinFailAlert] = useState(false);//공백 또는 확인 비번이 틀렸을때 알럿
-  const [dontUseThisId, setdontUseThisId] = useState(false);//중복되는 아이디가 있을때 알럿
+  const [JoinFailAlert, setJoinFailAlert] = useState(false); //공백 또는 확인 비번이 틀렸을때 알럿
+  const [dontUseThisId, setdontUseThisId] = useState(false); //중복되는 아이디가 있을때 알럿
+  const [checkYourId, setCheckYourId] = useState(false); //작성한 아이디 조건이 틀릴때 알럿
+  const [checkYourPs, setCheckYourPs] = useState(false); //작성한 비밀번호 조건이 틀릴때 알럿
 
   useEffect(() => {
-    setMainLoadding(true)
-  },[])
+    setMainLoadding(true);
+  }, []);
 
   const router = useRouter();
 
@@ -29,7 +31,7 @@ const JoinMain = () => {
   `;
   //뮤테이션 로직, 반환값은 임의의 값을 할당함 = 아무값이나 전달이 되면 오류없이 뮤테이트 되었다는 뜻이기 때문
 
-  const [setUser, { data, loading }] = useMutation(SET_USER, {
+  const [setUser, { data, loading, reset }] = useMutation(SET_USER, {
     onError: (error) => {
       console.log(error);
       setdontUseThisId(true);
@@ -37,6 +39,11 @@ const JoinMain = () => {
     },
   });
   //setUser함수를 호출하면 뮤테이션을 실행함
+
+  var joinId_REtype = /(?=.*\d)(?=.*[a-z]).{4,10}$/;
+  var joinPassword_REtype = /(?=.*\d)(?=.*[a-z]).{8,15}/
+
+  
 
   const joinBtn = () => {
     if (
@@ -46,13 +53,21 @@ const JoinMain = () => {
       joinPswordCheck !== "" &&
       joinPsword == joinPswordCheck
     ) {
-      setUser({
-        variables: {
-          userId: joinId,
-          name: joinName,
-          password: joinPsword,
-        },
-      });
+      if (joinId_REtype.test(joinId)) {
+        if (joinPassword_REtype.test(joinPsword)) {
+          setUser({
+            variables: {
+              userId: String(joinId),
+              name: String(joinName),
+              password: String(joinPsword),
+            },
+          });
+        } else {
+          setCheckYourPs(true);
+        }
+      } else {
+        setCheckYourId(true);
+      }
     } else {
       setJoinFailAlert(true);
     }
@@ -60,15 +75,17 @@ const JoinMain = () => {
   //조건에 맞으면 뮤테이션을 실행하고 아니라면 경고창을 켜줌
 
   useEffect(() => {
+    console.log(data)
+    console.log(loading)
     if (data) {
-      router.push("/login")
+      router.push("/login");
     }
     if (loading) {
-      setMainLoadding(false)
+      setMainLoadding(false);
     } else {
-      setMainLoadding(true)
+      setMainLoadding(true);
     }
-  })
+  });
   //뮤테이션 로딩이끝나고 데이터베이스에 반영이 되면 data로 쿼리에서 지정한 값을 가져온다
 
   useEffect(() => {
@@ -76,20 +93,30 @@ const JoinMain = () => {
       setJoinFailAlert(false);
     }, 5000);
   }, [JoinFailAlert]); //JoinFailAlert의 상태가 변할때마다 실행함
-
   useEffect(() => {
     setTimeout(() => {
       setdontUseThisId(false);
     }, 5000);
   }, [dontUseThisId]); //dontUseThisId 상태가 변할때마다 실행함
+  useEffect(() => {
+    setTimeout(() => {
+      setCheckYourId(false);
+    }, 5000);
+  }, [checkYourId]);
+  useEffect(() => {
+    setTimeout(() => {
+      setCheckYourPs(false);
+    }, 5000);
+  }, [checkYourPs]);
 
   useEffect(() => {
     return () => {
-      setJoinFailAlert(false)
+      setJoinFailAlert(false);
       setdontUseThisId(false);
+      setCheckYourId(false);
+      setCheckYourPs(false);
     };
-  }, []);//클린업함수
-  
+  }, []); //클린업함수
 
   return (
     <>
@@ -103,6 +130,18 @@ const JoinMain = () => {
         <Alert severity="error">
           <AlertTitle>회원가입 실패</AlertTitle>
           <strong>이미 사용중인 아이디 입니다.</strong>
+        </Alert>
+      )}
+      {checkYourId && (
+        <Alert severity="error">
+          <AlertTitle>아이디를 확인해주세요</AlertTitle>
+          <strong>아이디는 영문,숫자조합 4~10자리로 입력해주세요</strong>
+        </Alert>
+      )}
+      {checkYourPs && (
+        <Alert severity="error">
+          <AlertTitle>비밀번호를 확인해주세요</AlertTitle>
+          <strong>비밀번호는 영문,숫자조합 8~15자리로 입력해주세요</strong>
         </Alert>
       )}
 
