@@ -188,8 +188,8 @@ a {
   align-items: center;
 }
 
-.login_btn {
-  background: #fff;
+.login_btn a{
+  color: #1976d2;
 }
 
 .main_userSpan {
@@ -511,13 +511,4 @@ a {
   z-index: 2000;
   display: grid;
   align-items: center;
-}
-
-.Button {
-  color: white;
-}
-
-.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
-  -webkit-tap-highlight-color: #fff;
-  background-color: #fff;
 }
