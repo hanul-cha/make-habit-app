@@ -40,12 +40,15 @@ const Main = ({
     }
     //첫로그인하고나서 그려줄 화면에 필요한 setState
     axios.get("/api/isLogin").then((res) => {
+      console.log(res.data.id)
+      
       if (res.status === 200 && res.data.id) {
         setLoginUser(res.data.id);
       }
     });
     //새로고침이나 라우트 이동후에 사용할 setState
   }, []);
+  console.log(loginUser)
   /* 
   graphql 서버로 날릴 쿼리 아이디를 뽑는 로직입니다
   로그인을 시도해서 성공했다면 router로 들어온 아이디가 전달될것입니다
@@ -71,7 +74,7 @@ const Main = ({
       setMainLoadding(true)
     }//하위컴포넌트의 로딩이 끝나면 로딩창을 꺼줌
   });
-  console.log(toDayLoading, lastWeekLoading)
+  /* console.log(toDayLoading, lastWeekLoading) *///로딩현황
 
   useEffect(() => {
     return () => {

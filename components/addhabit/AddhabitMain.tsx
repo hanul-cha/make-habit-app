@@ -66,7 +66,7 @@ const AddhabitMain = () => {
         </Alert>
       )}
 
-      {userInfo !== undefined ? (
+      {userInfo !== undefined && userInfo !== "" ? (
         <div className="addHabit">
           <h2>
             <span>{data?.userByUserId?.name}</span>님의 취미
