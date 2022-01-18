@@ -39,16 +39,16 @@ const Main = ({
       setLoginUser(String(user.userId));
     }
     //첫로그인하고나서 그려줄 화면에 필요한 setState
-    axios.get("/api/isLogin").then((res) => {
-      console.log(res.data.id)
-      
+    /* axios.get("/api/isLogin").then((res) => {
       if (res.status === 200 && res.data.id) {
         setLoginUser(res.data.id);
       }
-    });
+    }); */
+    const local = window.localStorage.getItem('id')
+    console.log(local)
+    setLoginUser(String(local));
     //새로고침이나 라우트 이동후에 사용할 setState
   }, []);
-  console.log(loginUser)
   /* 
   graphql 서버로 날릴 쿼리 아이디를 뽑는 로직입니다
   로그인을 시도해서 성공했다면 router로 들어온 아이디가 전달될것입니다
@@ -83,13 +83,16 @@ const Main = ({
   },[])//언마운트되면 로딩창을 띄움
 
   const removeCookie = () => {
-    axios.get("/api/logout").then((res) => {
+    /* axios.get("/api/logout").then((res) => {
       if (res.status === 200) {
         console.log("쿠키삭제 완료");
         router.push("/login");
       }
-    });
-  }; //쿠키 삭제
+    }); */
+    window.localStorage.removeItem('id')
+    router.push("/login");
+
+  }; //쿠키 에서 로컬로 변경
   /* console.log(userInfo); */
 
   return (

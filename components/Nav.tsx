@@ -20,12 +20,14 @@ const Nav = () => {
 
   const removeCookie = (event: Event | React.SyntheticEvent) => {
     handleClose(event)
-    axios.get("/api/logout").then((res) => {
+    /* axios.get("/api/logout").then((res) => {
       if (res.status === 200) {
         console.log("쿠키삭제 완료");
         router.push("/login");
       }
-    });
+    }); */
+    window.localStorage.removeItem('id')
+    router.push("/login");
   }; //쿠키 삭제
 
   const handleToggle = () => {

@@ -23,7 +23,7 @@ const GET_WEEK_HABIT = gql`
 `;
 
 const AddhabitMain = () => {
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState("");
   const [failAlert, setFailAlert] = useState(false);
 
   useEffect(() => {
@@ -39,11 +39,16 @@ const AddhabitMain = () => {
   });
 
   useEffect(() => {
-    axios.get("/api/isLogin").then((res) => {
+    /* axios.get("/api/isLogin").then((res) => {
       if (res.status === 200 && res.data.id) {
         setUserInfo(res.data.id);
       }
-    });
+    }); */
+    const local = window.localStorage.getItem('id')
+    if(local){
+      setUserInfo(local);
+    }
+    
 
     if (!loading) {
       setMainLoadding(true);
