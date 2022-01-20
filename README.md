@@ -31,6 +31,7 @@ yarn dev
     ps: 123456  
     으로 로그인 하시고 확인해 주시면 됩니다.
 ## Deploy
+    https://make-habit-app.vercel.app/
     
 
 
