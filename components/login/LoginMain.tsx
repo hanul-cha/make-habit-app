@@ -7,22 +7,27 @@ import { setMainLoadding } from "../../src/store/apply";
 const LoginMain = () => {
   const [id, setId] = useState("");
   const [psword, setpsword] = useState("");
-  const [doLogin, setDoLogin] = useState(false);//로그인 로직 컴포넌트를 켜고 끄는 state
-  const [failAlert, setFailAlert] = useState(false);//알럿을 키고 끄는 state
+  const [doLogin, setDoLogin] = useState(false); //로그인 로직 컴포넌트를 켜고 끄는 state
+  const [failAlert, setFailAlert] = useState(false); //알럿을 키고 끄는 state
 
   const pushBtn = () => {
     setDoLogin(true);
   };
   //로그인 로직 컴포넌트 실행
 
+  const pushTest = () => {
+    setId("ccchhh1234")
+    setpsword("123456")
+  }
+
   useEffect(() => {
-    setMainLoadding(true)
-  },[])
+    setMainLoadding(true);
+  }, []);
 
   useEffect(() => {
     return () => {
       setDoLogin(false);
-      setMainLoadding(false)
+      setMainLoadding(false);
     };
   }, []);
   //다른 라우트로 이동하기 전에 꺼주는 클린업
@@ -50,6 +55,7 @@ const LoginMain = () => {
           variant="outlined"
           placeholder="user id"
           name="id"
+          value={id}
           onChange={(e) => setId(e.target.value)}
         />
 
@@ -61,6 +67,7 @@ const LoginMain = () => {
           name="psword"
           type="password"
           placeholder="user password"
+          value={psword}
           onChange={(e) => setpsword(e.target.value)}
         />
 
@@ -68,8 +75,18 @@ const LoginMain = () => {
           login
         </Button>
       </div>
+      <div className="runLoginTestWrapper">
+        <Button sx={{width:400}} className="runLoginTest" variant="outlined" onClick={pushTest}>
+          테스트용 아이디로 로그인하기
+        </Button>
+      </div>
       {doLogin && (
-        <LoginConectDB id={id} psword={psword} setFailAlert={setFailAlert} setDoLogin={setDoLogin} />
+        <LoginConectDB
+          id={id}
+          psword={psword}
+          setFailAlert={setFailAlert}
+          setDoLogin={setDoLogin}
+        />
       )}
     </>
   );

@@ -192,6 +192,12 @@ a {
   color: #1976d2;
 }
 
+.runLoginTestWrapper {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
 .main_userSpan {
   font-size: 20px;
   color: coral;
@@ -272,6 +278,21 @@ a {
   font-size: 37px;
   font-weight: 600;
 }
+
+.demo {
+  width: 300px;
+  padding-bottom: 10px;
+}
+.demo > h2 {
+  font-size: 25px;
+  font-weight: 600;
+  margin: 20px;
+  color : #1976d2
+}
+.demo > p {
+  margin-bottom: 10px;
+  margin-left: 20px;
+} 
 
 /* lastweek */
 .noLastWeekHabit {
